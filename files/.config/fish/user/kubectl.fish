@@ -37,3 +37,7 @@ abbr kdelp "kubectl delete pod"
 abbr kdeld "kubectl delete deploy"
 abbr kdelcm "kubectl delete configmap"
 abbr kdels "kubectl delete service"
+
+abbr kge "kubectl get events"
+abbr kgep "kubectl get events --field-selector involvedObject.kind=Pod,involvedObject.name="
+abbr kged "kubectl get events --field-selector involvedObject.kind=Deployment,involvedObject.name="
