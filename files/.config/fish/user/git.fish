@@ -18,6 +18,9 @@ abbr gc! "git commit -v --amend"
 abbr gc "git commit -v"
 
 abbr gupam "git fetch && git pull --rebase --autostash origin master"
+abbr grbc "git rebase --continue"
+abbr grba "git rebase --abort"
+
 abbr gf "git fetch"
 abbr gl "git pull"
 

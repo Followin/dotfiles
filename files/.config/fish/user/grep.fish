@@ -1,0 +1,1 @@
+abbr grepi "grep -i"

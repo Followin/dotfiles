@@ -18,13 +18,12 @@ return {
       config = {
         ensure_installed = {
           "lua_ls",
-          "rust_analyzer",
           "omnisharp",
           "dockerls",
           "html",
           "jsonls",
           "tsserver",
-          "pyright",
+          --"pyright",
           "sqlls",
           "svelte",
           "tailwindcss",
@@ -54,6 +53,8 @@ return {
           "yaml",
           "c_sharp",
           "query",
+          "css",
+          "scss",
         },
         playground = {
           enable = true,
@@ -70,6 +71,8 @@ return {
           "csharpier",
           "fixjson",
           "luacheck",
+          "eslint",
+          "prettierd",
         },
       },
     },
@@ -104,6 +107,7 @@ return {
       config = function(_, opts)
         local cmp = require "cmp"
         opts.mapping = cmp.mapping.preset.insert {
+          ---@diagnostic disable-next-line: missing-parameter
           ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -111,6 +115,19 @@ return {
         cmp.setup(opts)
       end,
       lazy = false,
+    },
+    {
+      "nvim-treesitter/nvim-treesitter-context",
+      lazy = false,
+    },
+    -- {
+    --   "Hoffs/omnisharp-extended-lsp.nvim",
+    --   lazy = false,
+    -- },
+  },
+  mappings = {
+    n = {
+      ["<C-p>"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" },
     },
   },
   options = {
@@ -122,6 +139,9 @@ return {
         extends = "»",
         precedes = "«",
         eol = "⏎",
+      },
+      clipboard = {
+        ["+"] = "unnamedplus",
       },
       list = true,
     },
@@ -143,6 +163,15 @@ return {
           "json",
         },
       },
+      -- filter = function(client)
+      --   if vim.bo.filetype == "javascript" then return client.name == "null-ls" end
+      --   if vim.bo.filetype == "typescriptreact" then return client.name == "null-ls" end
+      --
+      --   return true
+      -- end,
+      disabled = {
+        "tsserver",
+      },
     },
     ["powershell_es"] = {
       powershell = {
@@ -163,6 +192,21 @@ return {
             },
           },
         },
+      },
+      ["omnisharp"] = {
+        on_attach = function(client)
+          local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+          for i, v in ipairs(tokenModifiers) do
+            tokenModifiers[i] = v:gsub(" ", "_")
+          end
+          local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+          for i, v in ipairs(tokenTypes) do
+            tokenTypes[i] = v:gsub(" ", "_")
+          end
+        end,
+        -- handlers = {
+        --   ["textDocument/definition"] = require("omnisharp_extended").handler,
+        -- },
       },
       tsserver = {
         on_attach = function(client, bufnr) require("twoslash-queries").attach(client, bufnr) end,

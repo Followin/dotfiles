@@ -31,7 +31,7 @@ abbr kcuc "kubectl config use-context"
 
 abbr kpf "kubectl port-forward"
 abbr krrd "kubectl rollout restart deploy"
-abbr ksd "kubectl scale deploy"
+abbr ksd "kubectl scale deploy --replicas="
 
 abbr kdelp "kubectl delete pod"
 abbr kdeld "kubectl delete deploy"
