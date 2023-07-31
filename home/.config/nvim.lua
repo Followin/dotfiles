@@ -77,6 +77,17 @@ return {
       },
     },
     {
+      "nvim-telescope/telescope.nvim",
+      config = {
+        pickers = {
+          find_files = {
+            find_command = { "fd", "-H", "--type", "f", "--follow", "--exclude", ".git", "--exclude",
+              "node_modules", "--exclude", "target", "--exclude", "dist" },
+          },
+        }
+      }
+    },
+    {
       "goolord/alpha-nvim",
       config = {
         section = {
@@ -91,6 +102,21 @@ return {
           },
         },
       },
+    },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      config = {
+        filesystem = {
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+            never_show = {
+              ".git",
+              "node_modules",
+            }
+          }
+        }
+      }
     },
     {
       "marilari88/twoslash-queries.nvim",
