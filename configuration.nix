@@ -146,6 +146,7 @@
   environment.variables = rec {
     TERMINAL = "kitty";
     EDITOR = "nvim";
+    FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
   };
 
   nix.extraOptions = ''

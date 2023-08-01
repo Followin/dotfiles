@@ -81,8 +81,7 @@ return {
       config = {
         pickers = {
           find_files = {
-            find_command = { "fd", "-H", "--type", "f", "--follow", "--exclude", ".git", "--exclude",
-              "node_modules", "--exclude", "target", "--exclude", "dist" },
+            find_command = { "fd", "-H", "--type", "f", "--follow", "--exclude", ".git", "--exclude", "node_modules" },
           },
         }
       }
