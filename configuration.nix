@@ -141,6 +141,10 @@
     btop
     xclip
     libinput-gestures
+
+    fishPlugins.z
+    fishPlugins.fzf-fish
+    fishPlugins.pure
   ];
 
   environment.variables = rec {

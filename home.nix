@@ -13,11 +13,14 @@
     recursive = true;
   };
   home.file.".config/fish/config.fish".source = ./home/.config/fish/config.fish;
-  home.file.".config/fish/fish_plugins".source = ./home/.config/fish/fish_plugins;
 
   home.file.".config/nvim/lua/user/init.lua".source = ./home/.config/nvim.lua;
 
   home.file.".config/i3/config".source = ./home/.config/i3config;
+  home.file.".config/i3blocks" = {
+    source = ./home/.config/i3blocks;
+    recursive = true;
+  };
 
   home.file.".config/libinput-gestures.conf".source = ./home/.config/libinput-gestures.conf;
 
