@@ -124,6 +124,8 @@ in
       zoom-us
 
       feh
+
+      shutter
     ];
   };
   users.defaultUserShell = pkgs.fish;
