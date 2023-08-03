@@ -96,8 +96,10 @@
     packages = with pkgs; [
       nodejs_20
 
-      dotnet-sdk_7
-      dotnet-sdk_8
+      (with dotnetCorePackages; combinePackages [
+        sdk_6_0
+        sdk_7_0
+      ])
 
       rustup
 
@@ -120,7 +122,16 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  networking.networkmanager.enable = true;
+  networking.wireless = {
+    enable = true;
+    networks = {
+      "21" = {
+        psk = "testjkl123";
+      };
+    };
+  };
+
+
   environment.systemPackages = with pkgs; [
     neovim
     wget
