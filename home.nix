@@ -22,7 +22,6 @@
   home.file.".config/i3".source = ./home/.config/i3;
   home.file.".config/i3blocks".source = ./home/.config/i3blocks;
 
-
   home.file.".config/kitty".source = ./home/.config/kitty;
 
   home.file.".config/libinput-gestures.conf".source = ./home/.config/libinput-gestures.conf;

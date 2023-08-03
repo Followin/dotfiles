@@ -30,6 +30,7 @@ return {
           "lemminx",
           "yamlls",
           "powershell_es",
+          "rnix",
         },
         automatic_installation = true,
       },
@@ -55,6 +56,7 @@ return {
           "query",
           "css",
           "scss",
+          "nix",
         },
         playground = {
           enable = true,
