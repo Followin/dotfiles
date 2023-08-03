@@ -4,9 +4,17 @@
 
 { inputs, config, pkgs, ... }:
 
+let
+  dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
+    sdk_6_0
+    sdk_7_0
+    sdk_8_0
+  ]);
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -16,13 +24,8 @@
   boot.resumeDevice = "/dev/disk/by-label/swap";
 
   nix.settings = {
-    substituters = [ 
-      "https://cache.nixos.org" 
-      "https://nixcache.reflex-frp.org" 
-      "https://hyprland.cachix.org"
-    ];
-    trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    substituters = [
+      "https://cache.nixos.org"
     ];
   };
 
@@ -48,15 +51,17 @@
   environment.pathsToLink = [ "/libexec" ];
   services.xserver = {
     enable = true;
-    
+
     desktopManager = {
       xterm.enable = false;
     };
 
     displayManager = {
       defaultSession = "none+i3";
-      autoLogin.enable = true;
-      autoLogin.user = "main";
+      autoLogin = {
+        enable = true;
+        user = "main";
+      };
     };
 
     windowManager.i3 = {
@@ -68,7 +73,7 @@
         i3blocks
       ];
     };
-    
+
     libinput.enable = true; # touchpad
     libinput.touchpad.naturalScrolling = true;
     libinput.touchpad.disableWhileTyping = true;
@@ -80,6 +85,10 @@
     xkbOptions = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
   };
 
+  security.polkit.enable = true;
+
+  virtualisation.docker.enable = true;
+
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -88,18 +97,18 @@
   hardware.pulseaudio.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+
+
   nixpkgs.config.allowUnfree = true;
+  programs.command-not-found.enable = false;
   programs.fish.enable = true;
   users.users.main = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       nodejs_20
 
-      (with dotnetCorePackages; combinePackages [
-        sdk_6_0
-        sdk_7_0
-      ])
+      dotnetPkg
 
       rustup
 
@@ -107,10 +116,14 @@
 
       nodePackages.eslint
 
+      jetbrains.rider
+
       google-chrome
       discord
       telegram-desktop
       zoom-us
+
+      feh
     ];
   };
   users.defaultUserShell = pkgs.fish;
@@ -130,7 +143,6 @@
       };
     };
   };
-
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -152,6 +164,7 @@
     btop
     xclip
     libinput-gestures
+    tldr
 
     fishPlugins.z
     fishPlugins.fzf-fish
@@ -162,6 +175,7 @@
     TERMINAL = "kitty";
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
+    DOTNET_ROOT = "${dotnetPkg}";
   };
 
   nix.extraOptions = ''
@@ -199,6 +213,9 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
+  system.autoUpgrade = {
+    enable = true;
+    channel = "https://nixos.org/channels/nixos-23.05";
+  };
 }
 

@@ -185,6 +185,7 @@ hide_edge_borders both
 exec --no-startup-id libinput-gestures
 exec --no-startup-id discord
 exec --no-startup-id telegram-desktop
+exec --no-startup-id feh --bg-fill ~/background.png
 
 # Start applications on specific workspaces
 assign [class="discord"] $ws10

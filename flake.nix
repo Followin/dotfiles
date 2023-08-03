@@ -13,7 +13,6 @@
 
     # Official NixOS package source, using nixos-unstable branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -51,9 +50,9 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.main = import ./home.nix;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.main = import ./home.nix;
           }
         ];
       };

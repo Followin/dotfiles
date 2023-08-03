@@ -26,12 +26,17 @@
 
   home.file.".config/libinput-gestures.conf".source = ./home/.config/libinput-gestures.conf;
 
+  home.file."background.png".source = ./background.png;
+
 
   programs.git = {
     enable = true;
     userName = "followin";
     userEmail = "dlike.version10@gmail.com";
   };
+
+  # programs.nix-index.enable = true;
+  # programs.nix-index.enableFishIntegration = true;
 
   programs.home-manager.enable = true;
 }
