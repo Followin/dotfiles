@@ -47,6 +47,12 @@ in
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   # # Enable the X11 windowing system.
   environment.pathsToLink = [ "/libexec" ];
   services.xserver = {
@@ -74,6 +80,8 @@ in
       ];
     };
 
+    videoDrivers = [ "nvidia" ];
+
     libinput.enable = true; # touchpad
     libinput.touchpad.naturalScrolling = true;
     libinput.touchpad.disableWhileTyping = true;
@@ -83,6 +91,16 @@ in
 
     layout = "us,ru";
     xkbOptions = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
+  };
+
+  hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
   };
 
   security.polkit.enable = true;
@@ -102,6 +120,7 @@ in
   nixpkgs.config.allowUnfree = true;
   programs.command-not-found.enable = false;
   programs.fish.enable = true;
+  programs.steam.enable = true;
   users.users.main = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" ]; # Enable ‘sudo’ for the user.
@@ -126,6 +145,8 @@ in
       feh
 
       shutter
+
+      protontricks
     ];
   };
   users.defaultUserShell = pkgs.fish;
@@ -171,6 +192,10 @@ in
     fishPlugins.z
     fishPlugins.fzf-fish
     fishPlugins.pure
+
+    (writeShellScriptBin "steam-offloaded" ''
+      nvidia-offload steam
+    '')
   ];
 
   environment.variables = rec {
@@ -178,6 +203,7 @@ in
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
     DOTNET_ROOT = "${dotnetPkg}";
+    XDG_DATA_HOME = "$HOME/.local/share";
   };
 
   nix.extraOptions = ''

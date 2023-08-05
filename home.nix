@@ -35,8 +35,6 @@
     userEmail = "dlike.version10@gmail.com";
   };
 
-  # programs.nix-index.enable = true;
-  # programs.nix-index.enableFishIntegration = true;
 
   programs.home-manager.enable = true;
 }
