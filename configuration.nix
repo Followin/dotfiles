@@ -86,7 +86,7 @@ in
     libinput.touchpad.naturalScrolling = true;
     libinput.touchpad.disableWhileTyping = true;
     libinput.touchpad.additionalOptions = ''
-      Option "ScrollPixelDistance" "50"
+      Option "ScrollPixelDistance" "100"
     '';
 
     layout = "us,ru";
@@ -104,6 +104,7 @@ in
   };
 
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   virtualisation.docker.enable = true;
 
@@ -111,8 +112,14 @@ in
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  sound.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    #jack.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
@@ -188,6 +195,11 @@ in
     xclip
     libinput-gestures
     tldr
+
+    # audio
+    pamixer
+    pulseaudio
+    alsa-utils
 
     fishPlugins.z
     fishPlugins.fzf-fish

@@ -41,6 +41,9 @@ interval=1
 signal=10
 #STEP=5%
 
+[microphone]
+interval=1
+
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
