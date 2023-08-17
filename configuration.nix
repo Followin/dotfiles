@@ -119,7 +119,7 @@
 
   nixpkgs.config.allowUnfree = true;
   programs.command-not-found.enable = false;
-  programs.steam.enable = true;
+  #programs.steam.enable = true;
   users.users.main = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" ]; # Enable ‘sudo’ for the user.
@@ -170,10 +170,6 @@
     pamixer
     pulseaudio
     alsa-utils
-
-    (writeShellScriptBin "steam-offloaded" ''
-      nvidia-offload steam
-    '')
   ];
 
   environment.variables = rec {

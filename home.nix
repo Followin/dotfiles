@@ -78,7 +78,11 @@ in
 
       shutter
 
-      protontricks
+      # steam
+      # protontricks
+      # (writeShellScriptBin "steam-offloaded" ''
+      #   nvidia-offload steam
+      # '')
     ];
 
   home.sessionVariables = {
