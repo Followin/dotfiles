@@ -4,13 +4,6 @@
 
 { inputs, config, pkgs, ... }:
 
-let
-  dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
-    sdk_6_0
-    sdk_7_0
-    sdk_8_0
-  ]);
-in
 {
   imports =
     [
@@ -126,36 +119,13 @@ in
 
   nixpkgs.config.allowUnfree = true;
   programs.command-not-found.enable = false;
-  programs.fish.enable = true;
   programs.steam.enable = true;
   users.users.main = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      nodejs_20
-
-      dotnetPkg
-
-      rustup
-
-      luajitPackages.luarocks
-
-      nodePackages.eslint
-
-      jetbrains.rider
-
-      google-chrome
-      discord
-      telegram-desktop
-      zoom-us
-
-      feh
-
-      shutter
-
-      protontricks
-    ];
   };
+
+  programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 
   fonts.packages = with pkgs; [
@@ -201,10 +171,6 @@ in
     pulseaudio
     alsa-utils
 
-    fishPlugins.z
-    fishPlugins.fzf-fish
-    fishPlugins.pure
-
     (writeShellScriptBin "steam-offloaded" ''
       nvidia-offload steam
     '')
@@ -214,7 +180,6 @@ in
     TERMINAL = "kitty";
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
-    DOTNET_ROOT = "${dotnetPkg}";
     XDG_DATA_HOME = "$HOME/.local/share";
   };
 
