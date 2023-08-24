@@ -164,6 +164,7 @@
     btop
     xclip
     libinput-gestures
+    xdotool
     tldr
 
     # audio

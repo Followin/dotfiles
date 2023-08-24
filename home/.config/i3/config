@@ -48,7 +48,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -115,6 +115,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+set $ws_call_zoom "[S-z] Zoom"
+set $ws_call_teams "[S-t] Teams"
+
 # switch to workspace
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
@@ -129,6 +132,9 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+z workspace $ws_call_zoom
+bindsym $mod+Shift+t workspace $ws_call_teams
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -190,6 +196,10 @@ exec --no-startup-id feh --bg-fill ~/background.png
 # Start applications on specific workspaces
 assign [class="discord"] $ws10
 assign [class="TelegramDesktop"] $ws10
+assign [class="zoom"] $ws_call_zoom
+
+for_window [urgent="latest" class="chrome"] focus
+for_window [urgent="latest" class="zoom"] focus
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

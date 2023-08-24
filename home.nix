@@ -78,6 +78,8 @@ in
 
       shutter
 
+      xfce.thunar
+
       # steam
       # protontricks
       # (writeShellScriptBin "steam-offloaded" ''
