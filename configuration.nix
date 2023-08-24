@@ -167,6 +167,9 @@
     xdotool
     tldr
 
+    cmake
+    gnumake
+
     # audio
     pamixer
     pulseaudio

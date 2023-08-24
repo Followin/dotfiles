@@ -185,7 +185,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+gaps inner 5
+gaps outer -5
+smart_gaps on
+
+default_border pixel 1
 smart_borders on
+
 hide_edge_borders both
 
 exec --no-startup-id libinput-gestures

@@ -17,13 +17,10 @@ in
 
   home.file.".config/fish/user".source = ./home/.config/fish/user;
 
-  home.file.".config/nvim".source = pkgs.fetchFromGitHub {
-    owner = "AstroNvim";
-    repo = "AstroNvim";
-    rev = "v3.34.5";
-    sha256 = "4RqZVEWTWoZYDsV/JcBQ+Z0ISyu4HbFwl0N715bFSP8=";
+  home.file.".config/nvim" = {
+    source = ./home/.config/nvim;
+    recursive = true;
   };
-  home.file.".config/astronvim/lua/user/init.lua".source = ./home/.config/nvim.lua;
 
   home.file.".config/i3".source = ./home/.config/i3;
   home.file.".config/i3blocks".source = ./home/.config/i3blocks;
@@ -60,6 +57,8 @@ in
       nodejs_20
 
       dotnetPkg
+
+      lua-language-server
 
       rustup
 
