@@ -8,7 +8,16 @@ return {
       require("lualine").setup({
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "filename" },
+          lualine_b = {
+            "branch",
+            "diff",
+            {
+              "diagnostics",
+              colored = true,
+              update_in_insert = true,
+            },
+            "filename",
+          },
           lualine_c = {
               -- invoke `progress` here.
             [[
