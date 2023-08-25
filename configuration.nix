@@ -113,6 +113,13 @@
     pulse.enable = true;
     #jack.enable = true;
   };
+  environment.etc."pipewire/pipewire.conf.d/99-custom.conf".text = ''
+    {
+      "context.properties": {
+        "module.x11.bell": false 
+      }
+    }
+  '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
