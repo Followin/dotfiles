@@ -54,19 +54,19 @@ in
 
   home.packages = with pkgs;
     [
+      neovide
+
       nodejs_20
-
       dotnetPkg
-
       lua-language-server
-
       rustup
-
       luajitPackages.luarocks
-
       nodePackages.eslint
+      nodePackages.typescript-language-server
+      nodePackages.prettier
 
       jetbrains.rider
+      jetbrains.datagrip
 
       google-chrome
       discord

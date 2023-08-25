@@ -38,3 +38,4 @@ vim.o.timeoutlen = 300
 vim.o.termguicolors = true
 vim.o.completeopt = 'menuone'
 vim.o.scrolloff = 5
+vim.o.guifont = "JetBrainsMono Nerd Font:h8"

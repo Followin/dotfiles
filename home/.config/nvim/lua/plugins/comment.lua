@@ -4,7 +4,9 @@ return {
     opts = {
       toggler = {
         line = '<leader>/',
-        block ='<leader>b/'
+      },
+      opleader = {
+        line = '<leader>/',
       }
     },
     lazy = false,

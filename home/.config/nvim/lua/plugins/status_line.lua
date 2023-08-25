@@ -6,6 +6,9 @@ return {
     },
     config = function()
       require("lualine").setup({
+        options = {
+          component_separators = "|",
+        },
         sections = {
           lualine_a = { "mode" },
           lualine_b = {

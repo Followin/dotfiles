@@ -146,6 +146,7 @@
 
   environment.systemPackages = with pkgs; [
     neovim
+
     wget
     curl
     networkmanager
