@@ -41,6 +41,8 @@ in
     {
       enable = true;
       interactiveShellInit = ''
+        fish_vi_key_bindings
+
         for f in $HOME/.config/fish/user/**/*.fish
           source $f
         end

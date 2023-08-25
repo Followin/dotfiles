@@ -42,7 +42,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'folke/neodev.nvim',
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
       { 'simrat39/rust-tools.nvim' }
     },
     config = function()
@@ -106,6 +106,8 @@ return {
       vim.diagnostic.config({
         update_in_insert = true
       })
+
+      require("funcs.autoformat")();
     end
   }
 }
