@@ -153,6 +153,7 @@
 
   environment.systemPackages = with pkgs; [
     neovim
+    nixd
 
     wget
     curl

@@ -14,7 +14,15 @@ return {
           'lua',
           'rust',
           'typescript',
-          'tsx'
+          'tsx',
+          'nix',
+          'json',
+          'yaml',
+          'toml',
+          'html',
+          'css',
+          'javascript',
+          'jsdoc'
         },
         auto_install = true,
 
