@@ -153,7 +153,6 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    nixd
 
     wget
     curl
@@ -193,7 +192,7 @@
   };
 
   nix.extraOptions = ''
-    experimental-features = nix-command flakes
+    experimental-features = nix-command flakes repl-flake
   '';
 
   # Some programs need SUID wrappers, can be configured further or are

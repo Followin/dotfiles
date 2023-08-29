@@ -33,7 +33,7 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-        }
+        },
       }
     end
   },
@@ -100,8 +100,47 @@ return {
       })
 
       -- nix
-      lspconfig.nixd.setup {
+      lspconfig.nil_ls.setup {
         capabilities = capabilities,
+        settings = {
+          ['nil'] = {
+            formatting = {
+              command = { "nixpkgs-fmt" },
+            }
+          }
+        }
+      }
+
+      -- efm
+      lspconfig.efm.setup {
+        capabilities = capabilities,
+        init_options = { documentFormatting = true },
+        filetypes = { 'typescript' },
+        settings = {
+          rootMarkers = { '.git/' },
+          languages = {
+            typescript = {
+              {
+                formatCommand =
+                'prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
+                formatStdin = true,
+                rootMarkers = {
+                  '.prettierrc',
+                  '.prettierrc.json',
+                  '.prettierrc.toml',
+                  '.prettierrc.json',
+                  '.prettierrc.yml',
+                  '.prettierrc.yaml',
+                  '.prettierrc.json5',
+                  '.prettierrc.js',
+                  '.prettierrc.cjs',
+                  '.prettierrc.config.js',
+                  '.prettierrc.config.cjs',
+                }
+              }
+            }
+          }
+        }
       }
 
       -- diagnostics

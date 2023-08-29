@@ -39,3 +39,8 @@ vim.o.termguicolors = true
 vim.o.completeopt = 'menuone'
 vim.o.scrolloff = 5
 vim.o.guifont = "JetBrainsMono Nerd Font:h8"
+
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true

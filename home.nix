@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
@@ -65,7 +65,10 @@ in
       luajitPackages.luarocks
       nodePackages.eslint
       nodePackages.typescript-language-server
-      nodePackages.prettier
+      prettierd
+      nixpkgs-fmt
+      nil
+      efm-langserver
 
       jetbrains.rider
       jetbrains.datagrip
@@ -91,7 +94,6 @@ in
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnetPkg}";
   };
-
 
   programs.home-manager.enable = true;
 }
