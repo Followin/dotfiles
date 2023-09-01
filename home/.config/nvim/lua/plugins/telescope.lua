@@ -42,18 +42,37 @@ return {
 
       pcall(telescope.load_extension, 'fzf')
 
-      vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = 'Find Files' })
+      local builtin = require('telescope.builtin')
 
-      vim.keymap.set('n', '<leader>f/', function()
-        -- You can pass additional configuration to telescope to change theme, layout, etc.
-        require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      local function is_git_repo()
+        vim.fn.system("git rev-parse --is-inside-work-tree")
+        return vim.v.shell_error == 0
+      end
 
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live Grep' })
-      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'Grep Word' })
+      local function get_git_root()
+        local dot_git_path = vim.fn.finddir(".git", ";")
+        return vim.fn.fnamemodify(dot_git_path, ":h")
+      end
+
+      local search_opts = nil;
+
+      local function get_search_opts()
+        search_opts = is_git_repo() and {
+          cwd = get_git_root(),
+        } or {}
+
+        get_search_opts = function() return search_opts end
+
+        return search_opts
+      end
+
+      vim.keymap.set('n', '<C-p>', function() builtin.find_files(get_search_opts()) end, { desc = 'Find Files' })
+
+      vim.keymap.set('n', '<leader>f/', function() builtin.current_buffer_fuzzy_find({ previewer = false }) end,
+        { desc = '[/] Fuzzily search in current buffer' })
+
+      vim.keymap.set('n', '<leader>fg', function() builtin.live_grep(get_search_opts()) end, { desc = 'Live Grep' })
+      vim.keymap.set('n', '<leader>fw', function() builtin.grep_string(get_search_opts()) end, { desc = 'Grep Word' })
     end
   }
 }
