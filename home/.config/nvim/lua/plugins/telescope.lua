@@ -17,10 +17,22 @@ return {
         end,
       },
     },
-    config = function() 
+    config = function()
       local telescope = require('telescope')
 
       telescope.setup {
+        defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+            '--glob', '!.git',
+          },
+        },
         pickers = {
           find_files = {
             find_command = { "fd", "-H", "--type", "f", "--follow", "--exclude", ".git", "--exclude", "node_modules" },
@@ -39,6 +51,9 @@ return {
           previewer = false,
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
+
+      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live Grep' })
+      vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = 'Grep Word' })
     end
   }
 }

@@ -79,6 +79,25 @@ return {
             -- Code action groups
             vim.keymap.set("n", "<Leader>la", rt.code_action_group.code_action_group, { buffer = bufnr })
           end,
+          capabilities = capabilities,
+          settings = {
+            ["rust-analyzer"] = {
+              procMacro = {
+                enable = true
+              },
+              checkOnSave = {
+                command = "clippy"
+              },
+            }
+          }
+        },
+        tools = {
+          hover_actions = {
+            auto_focus = true,
+          },
+          runnables = {
+            use_telescope = true,
+          },
         },
       })
 

@@ -69,6 +69,7 @@ in
       nixpkgs-fmt
       nil
       efm-langserver
+      ripgrep
 
       jetbrains.rider
       jetbrains.datagrip
@@ -77,6 +78,8 @@ in
       discord
       telegram-desktop
       zoom-us
+
+      wireshark
 
       feh
 
