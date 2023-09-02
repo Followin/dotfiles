@@ -58,6 +58,7 @@ in
     [
       neovide
 
+      # neovim lsps and plugins
       nodejs_20
       dotnetPkg
       lua-language-server
@@ -70,6 +71,9 @@ in
       nil
       efm-langserver
       ripgrep
+      (writeShellScriptBin "OmniSharp" ''
+        ${dotnetPkg}/bin/dotnet ${omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll "$@"
+      '')
 
       jetbrains.rider
       jetbrains.datagrip
