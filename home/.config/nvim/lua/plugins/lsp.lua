@@ -43,7 +43,11 @@ return {
     dependencies = {
       'folke/neodev.nvim',
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-      { 'simrat39/rust-tools.nvim' }
+      { 'simrat39/rust-tools.nvim' },
+      {
+        'weilbith/nvim-code-action-menu',
+        cmd = 'CodeActionMenu',
+      }
     },
     config = function()
       local lspconfig = require('lspconfig')
@@ -117,7 +121,7 @@ return {
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
           vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
-          vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
+          vim.keymap.set({ 'n', 'v' }, '<leader>la', "<Cmd>CodeActionMenu<Cr>", opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         end,
       })
@@ -183,5 +187,5 @@ return {
 
       require("funcs.autoformat")();
     end
-  }
+  },
 }
