@@ -74,6 +74,7 @@ in
       (writeShellScriptBin "OmniSharp" ''
         ${dotnetPkg}/bin/dotnet ${omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll "$@"
       '')
+      netcoredbg
 
       jetbrains.rider
       jetbrains.datagrip
