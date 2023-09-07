@@ -175,6 +175,8 @@
     libinput-gestures
     xdotool
     tldr
+    lsof
+    neofetch
 
     cmake
     gnumake

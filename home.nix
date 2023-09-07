@@ -85,6 +85,7 @@ in
       zoom-us
 
       wireshark
+      openssl
 
       feh
 
