@@ -4,7 +4,7 @@ let
   dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
     sdk_6_0
     sdk_7_0
-    sdk_8_0
+    # sdk_8_0
   ]);
 in
 {
@@ -86,6 +86,7 @@ in
 
       wireshark
       openssl
+      openvpn
 
       feh
 
@@ -103,6 +104,11 @@ in
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnetPkg}";
   };
+
+  # TODO: Make derivation out of this
+  home.sessionPath = [
+    "/home/main/@data/pulum/pulumi-dotnet/pulumi-language-dotnet"
+  ];
 
   programs.home-manager.enable = true;
 }

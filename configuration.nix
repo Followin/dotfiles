@@ -16,11 +16,27 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.resumeDevice = "/dev/disk/by-label/swap";
 
-  nix.settings = {
-    substituters = [
-      "https://cache.nixos.org"
-    ];
+
+  nix = {
+    settings = {
+      substituters = [
+        "https://cache.nixos.org"
+      ];
+      auto-optimise-store = true;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes repl-flake
+    '';
   };
+
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -145,6 +161,7 @@
 
   networking.wireless = {
     enable = true;
+
     networks = {
       "21" = {
         psk = "testjkl123";
@@ -152,51 +169,93 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    neovim
+  systemd.services.systemd-networkd = {
+    # environment = {
+    #   SYSTEMD_LOG_LEVEL = "debug";
+    # };
 
-    wget
-    curl
-    networkmanager
-    pavucontrol
-    git
-    kitty
-    fzf
-    bat
-    fd
-    unzip
-    binutils
-    gcc
-    glibc
-    sysstat
-    acpi
-    btop
-    xclip
-    libinput-gestures
-    xdotool
-    tldr
-    lsof
-    neofetch
+    # serviceConfig = { };
+  };
 
-    cmake
-    gnumake
+  networking.dhcpcd.enable = false;
 
-    # audio
-    pamixer
-    pulseaudio
-    alsa-utils
-  ];
+  systemd.network = {
+    enable = true;
+    networks.wlp0 = {
+      matchConfig.Name = "wlp0s20f3";
+      dhcpV4Config = {
+        RouteMetric = 100;
+      };
+      networkConfig = {
+        DHCP = "ipv4";
+        IPv6AcceptRA = false;
+        # DNSDefaultRoute = false;
+      };
+    };
+  };
 
-  environment.variables = rec {
+  services.openvpn.servers = {
+    debvpn = {
+      config = '' config /home/main/vpn/london.deb.ovpn '';
+      autoStart = false;
+      updateResolvConf = true;
+    };
+  };
+
+  py.wireguard = {
+    enable = true;
+    privateKeyFilePath = "/etc/systemd/network/wg/private";
+    servers = [
+      {
+        name = "tokyo";
+        publicKey = "1jhSgo+HqqDgbAOVIR4xI3P2tjQTpAh6DkV9sA+IXlk=";
+        ip = "45.32.29.242";
+      }
+    ];
+  };
+
+  environment.systemPackages = with pkgs;
+    [
+      neovim
+
+      wget
+      curl
+      networkmanager
+      pavucontrol
+      git
+      kitty
+      fzf
+      bat
+      fd
+      unzip
+      binutils
+      gcc
+      glibc
+      sysstat
+      acpi
+      btop
+      xclip
+      libinput-gestures
+      xdotool
+      tldr
+      lsof
+      neofetch
+
+      cmake
+      gnumake
+
+      # audio
+      pamixer
+      pulseaudio
+      alsa-utils
+    ];
+
+  environment.variables = {
     TERMINAL = "kitty";
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
     XDG_DATA_HOME = "$HOME/.local/share";
   };
-
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes repl-flake
-  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

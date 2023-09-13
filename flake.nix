@@ -15,7 +15,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs"; 
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    py-wireguard = {
+      url = "github:followin/py-nixos-wireguard";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -29,7 +33,7 @@
   # 
   # The `@` syntax here is used to alias the attribute set of the
   # inputs's parameter, making it convenient to use inside the function.
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, py-wireguard, ... }@inputs: {
     nixosConfigurations = {
       # By default, NixOS will try to refer the nixosConfiguration with
       # its hostname, so the system named `nixos-test` will use this one.
@@ -49,12 +53,13 @@
           # Import the configuration.nix here, so that the
           # old configuration file can still take effect.
           # Note: configuration.nix itself is also a Nix Module,
+          py-wireguard.nixosModules.default
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.main.imports = [./home.nix ];
+            home-manager.users.main.imports = [ ./home.nix ];
             home-manager.extraSpecialArgs = specialArgs;
           }
         ];

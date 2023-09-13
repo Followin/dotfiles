@@ -36,10 +36,31 @@
         "type": "github"
       }
     },
+    "py-wireguard": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1694620789,
+        "narHash": "sha256-6TCPLQzVms/cAEnejq4Vel/zd2Xl/2LhVuV7m734QkU=",
+        "owner": "followin",
+        "repo": "py-nixos-wireguard",
+        "rev": "35a93a9bdacb1f8103db712450aa846dc137e771",
+        "type": "github"
+      },
+      "original": {
+        "owner": "followin",
+        "repo": "py-nixos-wireguard",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "py-wireguard": "py-wireguard"
       }
     }
   },
