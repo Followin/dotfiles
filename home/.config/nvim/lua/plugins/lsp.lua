@@ -27,15 +27,15 @@ return {
         mapping = cmp.mapping.preset.insert {
           ['<C-Space>'] = cmp.mapping.complete {},
           ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace
-          }
+            behavior = cmp.ConfirmBehavior.Replace,
+          },
         },
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
         },
       }
-    end
+    end,
   },
 
   {
@@ -47,7 +47,7 @@ return {
       {
         'weilbith/nvim-code-action-menu',
         cmd = 'CodeActionMenu',
-      }
+      },
     },
     config = function()
       local lspconfig = require('lspconfig')
@@ -63,13 +63,21 @@ return {
         settings = {
           Lua = {
             workspace = {
-              checkThirdParty = false
+              checkThirdParty = false,
             },
             telemetry = {
-              enable = false
-            }
-          }
-        }
+              enable = false,
+            },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = "space",
+                indent_size = "2",
+                trailing_table_separator = "smart",
+              },
+            },
+          },
+        },
       }
 
       -- rust
@@ -87,13 +95,13 @@ return {
           settings = {
             ["rust-analyzer"] = {
               procMacro = {
-                enable = true
+                enable = true,
               },
               checkOnSave = {
-                command = "clippy"
+                command = "clippy",
               },
-            }
-          }
+            },
+          },
         },
         tools = {
           hover_actions = {
@@ -169,16 +177,16 @@ return {
                   '.prettierrc.cjs',
                   '.prettierrc.config.js',
                   '.prettierrc.config.cjs',
-                }
-              }
+                },
+              },
             },
             json = {
               {
                 formatCommand = 'fixjson',
-              }
+              },
             },
-          }
-        }
+          },
+        },
       }
 
       -- diagnostics
@@ -186,10 +194,10 @@ return {
       vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
       vim.diagnostic.config({
-        update_in_insert = true
+        update_in_insert = true,
       })
 
       require("funcs.autoformat")();
-    end
+    end,
   },
 }

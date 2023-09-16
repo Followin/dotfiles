@@ -7,8 +7,8 @@ return {
       },
       opleader = {
         line = '<leader>/',
-      }
+      },
     },
     lazy = false,
-  }
+  },
 }

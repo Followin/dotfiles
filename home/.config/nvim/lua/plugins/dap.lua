@@ -10,7 +10,7 @@ return {
       dap.adapters.coreclr = {
         type = 'executable',
         command = '/etc/profiles/per-user/main/bin/netcoredbg',
-        args = { '--interpreter=vscode' }
+        args = { '--interpreter=vscode' },
       }
 
       dap.configurations.cs = {
@@ -51,5 +51,5 @@ return {
         dapui.close()
       end
     end,
-  }
+  },
 }

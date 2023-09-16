@@ -22,7 +22,7 @@ return {
           'html',
           'css',
           'javascript',
-          'jsdoc'
+          'jsdoc',
         },
         auto_install = true,
 
@@ -54,6 +54,6 @@ return {
       }
 
       require('colorizer').setup()
-    end
+    end,
   },
 }

@@ -37,7 +37,7 @@ return {
           find_files = {
             find_command = { "fd", "-H", "--type", "f", "--follow", "--exclude", ".git", "--exclude", "node_modules" },
           },
-        }
+        },
       }
 
       pcall(telescope.load_extension, 'fzf')
@@ -73,6 +73,6 @@ return {
 
       vim.keymap.set('n', '<leader>fg', function() builtin.live_grep(get_search_opts()) end, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>fw', function() builtin.grep_string(get_search_opts()) end, { desc = 'Grep Word' })
-    end
-  }
+    end,
+  },
 }

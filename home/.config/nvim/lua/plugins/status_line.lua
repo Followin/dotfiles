@@ -22,7 +22,7 @@ return {
             "filename",
           },
           lualine_c = {
-              -- invoke `progress` here.
+            -- invoke `progress` here.
             [[
               require("lsp-progress").progress({
                 format = function(messages)
@@ -42,9 +42,9 @@ return {
                     end
                 end,
               })
-            ]]
+            ]],
           },
-        }
+        },
       })
 
       -- listen lsp-progress event and refresh lualine
@@ -59,6 +59,6 @@ return {
     'linrongbin16/lsp-progress.nvim',
     config = function()
       require('lsp-progress').setup()
-    end
-  }
+    end,
+  },
 }

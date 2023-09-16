@@ -8,6 +8,6 @@ return {
       oil.setup()
 
       vim.keymap.set("n", "<leader>e", oil.toggle_float, { noremap = true, silent = true })
-    end
-  }
+    end,
+  },
 }
