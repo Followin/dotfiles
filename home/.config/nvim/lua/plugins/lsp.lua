@@ -138,11 +138,17 @@ return {
         enable_import_completion = true,
       }
 
+      -- json
+      lspconfig.jsonls.setup {
+        capabilities = capabilities,
+        cmd = { "vscode-json-languageserver", "--stdio" },
+      }
+
       -- efm
       lspconfig.efm.setup {
         capabilities = capabilities,
         init_options = { documentFormatting = true },
-        filetypes = { 'typescript' },
+        filetypes = { 'typescript', 'json' },
         settings = {
           rootMarkers = { '.git/' },
           languages = {
@@ -165,7 +171,12 @@ return {
                   '.prettierrc.config.cjs',
                 }
               }
-            }
+            },
+            json = {
+              {
+                formatCommand = 'fixjson',
+              }
+            },
           }
         }
       }

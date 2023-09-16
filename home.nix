@@ -65,6 +65,8 @@ in
       luajitPackages.luarocks
       nodePackages.eslint
       nodePackages.typescript-language-server
+      nodePackages.vscode-json-languageserver
+      nodePackages.fixjson
       prettierd
       nixpkgs-fmt
       nixd
