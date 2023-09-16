@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports =
@@ -15,7 +15,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.resumeDevice = "/dev/disk/by-label/swap";
-
+  boot.extraModprobeConfig = ''
+    options libata.force=noncq
+  '';
 
   nix = {
     settings = {
@@ -150,6 +152,7 @@
   };
 
   programs.fish.enable = true;
+  documentation.man.generateCaches = lib.mkForce false;
   users.defaultUserShell = pkgs.fish;
 
   fonts.packages = with pkgs; [

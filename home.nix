@@ -62,13 +62,12 @@ in
       nodejs_20
       dotnetPkg
       lua-language-server
-      rustup
       luajitPackages.luarocks
       nodePackages.eslint
       nodePackages.typescript-language-server
       prettierd
       nixpkgs-fmt
-      nil
+      nixd
       efm-langserver
       ripgrep
       (writeShellScriptBin "OmniSharp" ''

@@ -127,15 +127,8 @@ return {
       })
 
       -- nix
-      lspconfig.nil_ls.setup {
+      lspconfig.nixd.setup {
         capabilities = capabilities,
-        settings = {
-          ['nil'] = {
-            formatting = {
-              command = { "nixpkgs-fmt" },
-            }
-          }
-        }
       }
 
       -- c#
