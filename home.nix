@@ -85,6 +85,7 @@ in
       telegram-desktop
       zoom-us
 
+      jq
       wireshark
       openssl
       openvpn
