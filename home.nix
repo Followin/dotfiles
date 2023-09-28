@@ -84,6 +84,7 @@ in
       discord
       telegram-desktop
       zoom-us
+      xcompmgr
 
       jq
       wireshark

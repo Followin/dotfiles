@@ -100,7 +100,7 @@
       Option "ScrollPixelDistance" "100"
     '';
 
-    layout = "us,ru";
+    layout = "us,ru,ua";
     xkbOptions = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
   };
 
