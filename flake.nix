@@ -20,33 +20,40 @@
   outputs = { self, nixpkgs, home-manager, py-wireguard, rust-overlay, ... }@inputs:
     let
       username = "main";
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      sharedModules = [
+        py-wireguard.nixosModules.default
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${username}.imports = [ ./home.nix ];
+          home-manager.extraSpecialArgs = specialArgs;
+        }
+
+        # rust
+        ({ pkgs, ... }: {
+          nixpkgs.overlays = [ rust-overlay.overlays.default ];
+          home-manager.users.${username}.home.packages = [
+            (pkgs.rust-bin.nightly.latest.default.override {
+              extensions = [ "rust-src" "rust-analyzer" "clippy" ];
+            })
+          ];
+        })
+      ];
     in
     {
       nixosConfigurations = {
         "nixos" = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            py-wireguard.nixosModules.default
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${username}.imports = [ ./home.nix ];
-              home-manager.extraSpecialArgs = specialArgs;
-            }
+          inherit system specialArgs;
+          modules = sharedModules ++ [ ./machines/nixos/configuration.nix ];
+        };
 
-            # rust
-            ({ pkgs, ... }: {
-              nixpkgs.overlays = [ rust-overlay.overlays.default ];
-              home-manager.users.${username}.home.packages = [
-                (pkgs.rust-bin.nightly.latest.default.override {
-                  extensions = [ "rust-src" "rust-analyzer" "clippy" ];
-                })
-              ];
-            })
-          ];
+        "nixvm" = nixpkgs.lib.nixosSystem rec {
+          inherit system specialArgs;
+          modules = sharedModules ++ [ ./machines/nixvm/configuration.nix ];
         };
       };
     };
