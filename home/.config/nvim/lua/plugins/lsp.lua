@@ -152,11 +152,16 @@ return {
         cmd = { "vscode-json-languageserver", "--stdio" },
       }
 
+      -- protobuf
+      lspconfig.bufls.setup {
+        capabilities = capabilities,
+      }
+
       -- efm
       lspconfig.efm.setup {
         capabilities = capabilities,
         init_options = { documentFormatting = true },
-        filetypes = { 'typescript', 'json' },
+        filetypes = { 'typescript' },
         settings = {
           rootMarkers = { '.git/' },
           languages = {

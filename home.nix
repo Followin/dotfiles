@@ -76,6 +76,9 @@ in
         ${dotnetPkg}/bin/dotnet ${omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll "$@"
       '')
       netcoredbg
+      buf-language-server
+
+      docker-compose
 
       jetbrains.rider
       jetbrains.datagrip
