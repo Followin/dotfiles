@@ -165,6 +165,7 @@
       tldr
       lsof
       neofetch
+      file
 
       cmake
       gnumake

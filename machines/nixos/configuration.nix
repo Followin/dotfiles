@@ -24,6 +24,8 @@
     nvidiaBusId = "PCI:1:0:0";
   };
 
+  # wifi
+  networking.useNetworkd = true;
   networking.wireless = {
     enable = true;
 

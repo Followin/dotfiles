@@ -87,6 +87,7 @@ in
       discord
       telegram-desktop
       zoom-us
+      teams-for-linux
       xcompmgr
 
       jq
