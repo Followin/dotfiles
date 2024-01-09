@@ -125,7 +125,7 @@
   programs.wireshark.enable = true;
   users.users.main = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" "vboxsf" ]; # Enable ‘sudo’ for the user.
   };
 
   programs.fish.enable = true;
