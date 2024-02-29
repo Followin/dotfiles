@@ -87,8 +87,10 @@
       Option "ScrollPixelDistance" "100"
     '';
 
-    layout = "us,ru,ua";
-    xkbOptions = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
+    xkb = {
+      layout = "us,ru,ua";
+      options = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
+    };
   };
 
   security.polkit.enable = true;
@@ -106,15 +108,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    extraConfig.pipewire."10-no-bell" = {
+      "context.properties" = {
+        "module.x11.bell" = false;
+      };
+    };
     #jack.enable = true;
   };
-  environment.etc."pipewire/pipewire.conf.d/99-custom.conf".text = ''
-    {
-      "context.properties": {
-        "module.x11.bell": false 
-      }
-    }
-  '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 

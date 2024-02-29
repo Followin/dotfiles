@@ -44,10 +44,7 @@ return {
       'folke/neodev.nvim',
       { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
       { 'simrat39/rust-tools.nvim' },
-      {
-        'weilbith/nvim-code-action-menu',
-        cmd = 'CodeActionMenu',
-      },
+      "aznhe21/actions-preview.nvim",
     },
     config = function()
       local lspconfig = require('lspconfig')
@@ -126,10 +123,11 @@ return {
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
           vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
-          vim.keymap.set({ 'n', 'v' }, '<leader>la', "<Cmd>CodeActionMenu<Cr>", opts)
+          vim.keymap.set({ 'n', 'v' }, '<leader>la', require("actions-preview").code_actions, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         end,
       })
