@@ -84,6 +84,9 @@ in
       jetbrains.rider
       jetbrains.datagrip
 
+      kubectl
+      azure-cli
+
       google-chrome
       discord
       telegram-desktop

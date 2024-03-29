@@ -45,4 +45,10 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
 
+vim.filetype.add({
+  extension = {
+    props = "xml",
+  },
+});
+
 vim.api.nvim_set_option("clipboard", "unnamed")

@@ -101,6 +101,20 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  #resolved
+  networking.useNetworkd = true;
+
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+      MulticastDNS=true
+    '';
+
+    domains = [
+      "local"
+    ];
+  };
+
   # Enable sound.
   sound.enable = false;
   services.pipewire = {
@@ -175,6 +189,7 @@
       pulseaudio
       alsa-utils
     ];
+  programs.nix-ld.enable = true;
 
   environment.variables = {
     TERMINAL = "kitty";
