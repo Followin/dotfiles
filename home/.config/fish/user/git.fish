@@ -17,7 +17,7 @@ abbr gcan! "git commit -v -a --amend --no-edit"
 abbr gc! "git commit -v --amend"
 abbr gc "git commit -v"
 
-abbr gupam "git fetch && git pull --rebase --autostash origin master"
+abbr gupam "git fetch && git pull --rebase --autostash origin (git_main_branch)"
 abbr grbc "git rebase --continue"
 abbr grba "git rebase --abort"
 

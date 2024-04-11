@@ -96,7 +96,16 @@
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # extraOptions = "-H tcp://0.0.0.0:2375";
+    daemon.settings = {
+      hosts = [
+        "tcp://0.0.0.0:2375"
+      ];
+      userland-proxy = false;
+    };
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -109,10 +118,6 @@
     extraConfig = ''
       MulticastDNS=true
     '';
-
-    domains = [
-      "local"
-    ];
   };
 
   # Enable sound.

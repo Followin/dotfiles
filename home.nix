@@ -35,6 +35,14 @@ in
     enable = true;
     userName = "followin";
     userEmail = "dlike.version10@gmail.com";
+    diff-so-fancy = {
+      enable = true;
+      changeHunkIndicators = true;
+    };
+    extraConfig = {
+      rerere.enable = true;
+      rebase.updateRefs = true;
+    };
   };
 
   programs.fish =

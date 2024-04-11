@@ -12,17 +12,23 @@ end
 
 abbr k kubectl
 
+abbr kg "kubectl get"
 abbr kgp "kubectl get pod"
 abbr kgs "kubectl get service"
 abbr kgi "kubectl get ingress"
 abbr kgd "kubectl get deploy"
 abbr kgcm "kubectl get configmap"
+abbr kgss "kubectl get statefulset"
+abbr kgsec "kubectl get secret"
 
+abbr kd "kubectl describe"
 abbr kdp "kubectl describe pods"
 abbr kds "kubectl describe service"
 abbr kdi "kubectl describe ingress"
 abbr kdd "kubectl describe deploy"
 abbr kdcm "kubectl describe configmap"
+abbr kdss "kubectl describe statefulset"
+abbr kdsec "kubectl describe secret"
 
 abbr kccc "kubectl config current-context"
 abbr kcgc "kubectl config get-contexts"
@@ -37,6 +43,9 @@ abbr kdelp "kubectl delete pod"
 abbr kdeld "kubectl delete deploy"
 abbr kdelcm "kubectl delete configmap"
 abbr kdels "kubectl delete service"
+abbr kdeli "kubectl delete ingress"
+abbr kdelss "kubectl delete statefulset"
+abbr kdelsec "kubectl delete secret"
 
 abbr kge "kubectl get events"
 abbr kgep "kubectl get events --field-selector involvedObject.kind=Pod,involvedObject.name="

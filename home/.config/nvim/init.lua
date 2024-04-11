@@ -48,6 +48,7 @@ vim.o.expandtab = true
 vim.filetype.add({
   extension = {
     props = "xml",
+    json = "jsonc",
   },
 });
 
