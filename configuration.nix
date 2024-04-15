@@ -62,14 +62,6 @@
       xterm.enable = false;
     };
 
-    displayManager = {
-      defaultSession = "none+i3";
-      autoLogin = {
-        enable = true;
-        user = "main";
-      };
-    };
-
     windowManager.i3 = {
       enable = true;
       extraPackages = with pkgs; [
@@ -92,6 +84,15 @@
       options = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
     };
   };
+
+  services.displayManager = {
+    defaultSession = "none+i3";
+    autoLogin = {
+      enable = true;
+      user = "main";
+    };
+  };
+
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
