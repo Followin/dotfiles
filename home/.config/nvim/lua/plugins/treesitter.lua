@@ -4,6 +4,7 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'norcalli/nvim-colorizer.lua',
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
     config = function()
@@ -54,6 +55,8 @@ return {
       }
 
       require('colorizer').setup()
+
+      require('treesitter-context').setup()
     end,
   },
 }

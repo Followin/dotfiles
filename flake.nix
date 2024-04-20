@@ -2,10 +2,10 @@
   description = "PY nixos";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     py-wireguard = {
@@ -18,17 +18,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, py-wireguard, rust-overlay, nixpkgs-stable, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, py-wireguard, rust-overlay, /* nixpkgs-unstable, */ ... }@inputs:
     let
       username = "main";
       system = "x86_64-linux";
-      pkgs-stable = import nixpkgs-stable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-      specialArgs = { inherit inputs pkgs-stable; };
+      # pkgs-unstable = import nixpkgs-unstable {
+      #   inherit system;
+      #   config = {
+      #     allowUnfree = true;
+      #   };
+      # };
+      specialArgs = { inherit inputs/* pkgs-unstable */; };
       sharedModules = [
         py-wireguard.nixosModules.default
         ./configuration.nix

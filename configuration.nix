@@ -5,9 +5,12 @@
 { inputs, config, pkgs, lib, ... }:
 
 {
+  hardware.firmware = with pkgs; [ wireless-regdb ];
   boot.extraModprobeConfig = ''
     options libata.force=noncq
   '';
+
+  # boot.consoleLogLevel = 7;
 
   nix = {
     settings = {
@@ -83,16 +86,15 @@
       layout = "us,ru,ua";
       options = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
     };
-  };
 
-  services.displayManager = {
-    defaultSession = "none+i3";
-    autoLogin = {
-      enable = true;
-      user = "main";
+    displayManager = {
+      defaultSession = "none+i3";
+      autoLogin = {
+        enable = true;
+        user = "main";
+      };
     };
   };
-
 
   security.polkit.enable = true;
   security.rtkit.enable = true;
@@ -128,11 +130,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    extraConfig.pipewire."10-no-bell" = {
-      "context.properties" = {
-        "module.x11.bell" = false;
-      };
-    };
+    # extraConfig.pipewire."10-no-bell" = {
+    #   "context.properties" = {
+    #     "module.x11.bell" = false;
+    #   };
+    # };
     #jack.enable = true;
   };
 
@@ -165,7 +167,7 @@
 
       wget
       curl
-      networkmanager
+      # networkmanager
       pavucontrol
       git
       kitty
