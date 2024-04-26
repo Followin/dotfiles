@@ -33,8 +33,6 @@ in
 
   programs.git = {
     enable = true;
-    userName = "followin";
-    userEmail = "dlike.version10@gmail.com";
     diff-so-fancy = {
       enable = true;
       changeHunkIndicators = true;
@@ -43,6 +41,24 @@ in
       rerere.enable = true;
       rebase.updateRefs = true;
     };
+    includes = [
+      {
+        condition = "hasconfig:remote.*.url:*github.com*/**";
+        contents = {
+          user = {
+            email = "dlike.version10@gmail.com";
+            name = "Followin";
+            signingKey = "~/.ssh/github";
+          };
+          gpg = {
+            format = "ssh";
+          };
+          commit = {
+            gpgSign = true;
+          };
+        };
+      }
+    ];
   };
 
   programs.fish =
@@ -106,6 +122,10 @@ in
       wireshark
       openssl
       openvpn
+
+      kubectl
+      kubernetes-helm
+      minikube
 
       feh
 

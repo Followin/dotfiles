@@ -28,7 +28,7 @@
       #     allowUnfree = true;
       #   };
       # };
-      specialArgs = { inherit inputs/* pkgs-unstable */; };
+      specialArgs = { inherit inputs username/* pkgs-unstable */; };
       sharedModules = [
         py-wireguard.nixosModules.default
         ./configuration.nix
@@ -36,8 +36,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.${username}.imports = [ ./home.nix ];
           home-manager.extraSpecialArgs = specialArgs;
+          home-manager.users.${username}.imports = [ ./home.nix ];
         }
 
         # rust
@@ -50,17 +50,30 @@
           ];
         })
       ];
+      nixosModules = [
+        ./machines/nixos/configuration.nix
+        {
+          home-manager.users.${username}.imports = [ ./machines/nixos/home.nix ];
+        }
+      ];
+
+      nixvmModules = [
+        ./machines/nixvm/configuration.nix
+        {
+          home-manager.users.${username}.imports = [ ./machines/nixvm/home.nix ];
+        }
+      ];
     in
     {
       nixosConfigurations = {
         "nixos" = nixpkgs.lib.nixosSystem rec {
           inherit system specialArgs;
-          modules = sharedModules ++ [ ./machines/nixos/configuration.nix ];
+          modules = sharedModules ++ nixosModules;
         };
 
         "nixvm" = nixpkgs.lib.nixosSystem rec {
           inherit system specialArgs;
-          modules = sharedModules ++ [ ./machines/nixvm/configuration.nix ];
+          modules = sharedModules ++ nixvmModules;
         };
       };
     };

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, username, ... }:
 
 {
   hardware.firmware = with pkgs; [ wireless-regdb ];
@@ -91,7 +91,7 @@
       defaultSession = "none+i3";
       autoLogin = {
         enable = true;
-        user = "main";
+        user = username;
       };
     };
   };
@@ -145,7 +145,7 @@
   programs.command-not-found.enable = false;
   #programs.steam.enable = true;
   programs.wireshark.enable = true;
-  users.users.main = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" "vboxsf" ]; # Enable ‘sudo’ for the user.
   };
