@@ -54,3 +54,6 @@ vim.filetype.add({
 });
 
 vim.api.nvim_set_option("clipboard", "unnamed")
+
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
