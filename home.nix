@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 
 let
   dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
@@ -30,6 +30,8 @@ in
   home.file.".config/libinput-gestures.conf".source = ./home/.config/libinput-gestures.conf;
 
   home.file."background.png".source = ./background.png;
+
+  home.file.".ideavimrc".source = ./home/.ideavimrc;
 
   programs.git = {
     enable = true;
@@ -78,7 +80,7 @@ in
       ];
     };
 
-  home.packages = with pkgs;
+  home.packages = with pkgs-unstable;
     [
       neovide
 
@@ -102,6 +104,7 @@ in
       netcoredbg
       buf-language-server
       p7zip
+      powershell
 
       docker-compose
 

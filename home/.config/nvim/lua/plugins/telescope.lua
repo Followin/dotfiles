@@ -73,6 +73,7 @@ return {
 
       vim.keymap.set('n', '<leader>fg', function() builtin.live_grep(get_search_opts()) end, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>fw', function() builtin.grep_string(get_search_opts()) end, { desc = 'Grep Word' })
+      vim.keymap.set('n', '<leader>fb', function() builtin.buffers() end, { desc = 'show buffers' })
     end,
   },
 }

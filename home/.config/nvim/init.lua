@@ -49,6 +49,7 @@ vim.filetype.add({
   extension = {
     props = "xml",
     json = "jsonc",
+    avsc = "jsonc",
   },
 });
 

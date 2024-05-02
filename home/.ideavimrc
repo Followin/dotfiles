@@ -1,0 +1,12 @@
+nnoremap j gj
+nnoremap k gk
+
+set scrolloff=5
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+set relativenumber
