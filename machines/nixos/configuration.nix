@@ -25,16 +25,8 @@
   };
 
   # wifi
-  networking.useNetworkd = true;
-  networking.wireless = {
-    enable = true;
-
-    networks = {
-      "21" = {
-        psk = "testjkl123";
-      };
-    };
-  };
+  networking.dhcpcd.enable = false;
+  networking.wireless.iwd.enable = true;
 
   systemd.services.systemd-networkd = {
     # environment = {
@@ -44,40 +36,38 @@
     # serviceConfig = { };
   };
 
-  networking.dhcpcd.enable = false;
-
-  systemd.network = {
-    enable = true;
-    networks.wlp0 = {
-      matchConfig.Name = "wlp0s20f3";
-      dhcpV4Config = {
-        RouteMetric = 100;
-      };
-      networkConfig = {
-        DHCP = "ipv4";
-        IPv6AcceptRA = false;
-        # DNSDefaultRoute = false;
-      };
-    };
-  };
-
-  services.openvpn.servers = {
-    debvpn = {
-      config = '' config /home/main/vpn/london.deb.ovpn '';
-      autoStart = false;
-      updateResolvConf = true;
-    };
-  };
-
-  py.wireguard = {
-    enable = true;
-    privateKeyFilePath = "/etc/systemd/network/wg/private";
-    servers = [
-      {
-        name = "tokyo";
-        publicKey = "1jhSgo+HqqDgbAOVIR4xI3P2tjQTpAh6DkV9sA+IXlk=";
-        ip = "45.32.29.242";
-      }
-    ];
-  };
+  # systemd.network = {
+  #   enable = true;
+  #   networks.wlp0 = {
+  #     matchConfig.Name = "wlan0";
+  #     dhcpV4Config = {
+  #       RouteMetric = 100;
+  #     };
+  #     networkConfig = {
+  #       DHCP = "ipv4";
+  #       IPv6AcceptRA = false;
+  #       # DNSDefaultRoute = false;
+  #     };
+  #   };
+  # };
+  #
+  # services.openvpn.servers = {
+  #   debvpn = {
+  #     config = '' config /home/main/vpn/london.deb.ovpn '';
+  #     autoStart = false;
+  #     updateResolvConf = true;
+  #   };
+  # };
+  #
+  # py.wireguard = {
+  #   enable = true;
+  #   privateKeyFilePath = "/etc/systemd/network/wg/private";
+  #   servers = [
+  #     {
+  #       name = "tokyo";
+  #       publicKey = "1jhSgo+HqqDgbAOVIR4xI3P2tjQTpAh6DkV9sA+IXlk=";
+  #       ip = "45.32.29.242";
+  #     }
+  #   ];
+  # };
 }

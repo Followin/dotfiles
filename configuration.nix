@@ -165,9 +165,9 @@
     [
       neovim
 
+      iw
       wget
       curl
-      # networkmanager
       pavucontrol
       git
       kitty
