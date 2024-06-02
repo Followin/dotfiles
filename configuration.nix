@@ -75,24 +75,28 @@
       ];
     };
 
-    libinput.enable = true; # touchpad
-    libinput.touchpad.naturalScrolling = true;
-    libinput.touchpad.disableWhileTyping = true;
-    libinput.touchpad.additionalOptions = ''
-      Option "ScrollPixelDistance" "100"
-    '';
-
     xkb = {
       layout = "us,ru,ua";
       options = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
     };
+  };
 
-    displayManager = {
-      defaultSession = "none+i3";
-      autoLogin = {
-        enable = true;
-        user = username;
-      };
+  services.displayManager = {
+    defaultSession = "none+i3";
+    autoLogin = {
+      enable = true;
+      user = username;
+    };
+  };
+
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      naturalScrolling = true;
+      disableWhileTyping = true;
+      additionalOptions = ''
+        Option "ScrollPixelDistance" "100"
+      '';
     };
   };
 
