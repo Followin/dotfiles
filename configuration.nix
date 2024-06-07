@@ -39,7 +39,7 @@
   # networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "Europe/Kyiv";
+  services.automatic-timezoned.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -134,12 +134,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # extraConfig.pipewire."10-no-bell" = {
-    #   "context.properties" = {
-    #     "module.x11.bell" = false;
-    #   };
-    # };
-    #jack.enable = true;
+    extraConfig.pipewire."10-no-bell" = {
+      "context.properties" = {
+        "module.x11.bell" = false;
+      };
+    };
+    jack.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
