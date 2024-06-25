@@ -17,6 +17,8 @@ return {
       local cmp = require('cmp')
       local luasnip = require('luasnip')
 
+      print(vim.g.test);
+
       luasnip.config.setup {}
       cmp.setup {
         snippet = {

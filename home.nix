@@ -6,6 +6,7 @@ let
     sdk_7_0
     sdk_8_0
   ]);
+  commentEnable = true;
 in
 {
   home.username = "main";
@@ -21,6 +22,14 @@ in
     source = ./home/.config/nvim;
     recursive = true;
   };
+
+  home.file.".config/nvim/lua/config.lua".text = ''
+    vim.g.plugins = {
+      comment = {
+        enabled = ${if commentEnable then "true" else "false"};
+      },
+    }
+  '';
 
   home.file.".config/i3".source = ./home/.config/i3;
   home.file.".config/i3blocks".source = ./home/.config/i3blocks;
