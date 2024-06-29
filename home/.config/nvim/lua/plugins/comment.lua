@@ -10,6 +10,6 @@ return {
       },
     },
     lazy = false,
-    enabled = vim.g.plugins.comment.enabled,
+    enabled = vim.g.nixConfig.plugins.comment.enabled,
   },
 }

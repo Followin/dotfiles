@@ -57,27 +57,30 @@ return {
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
       -- lua
-      lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            telemetry = {
-              enable = false,
-            },
-            format = {
-              enable = true,
-              defaultConfig = {
-                indent_style = "space",
-                indent_size = "2",
-                trailing_table_separator = "smart",
+      if vim.g.nixConfig.lsp.lua_ls.enabled then
+        lspconfig.lua_ls.setup {
+          capabilities = capabilities,
+          cmd = { vim.g.nixConfig.lsp.lua_ls.serverPath },
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              telemetry = {
+                enable = false,
+              },
+              format = {
+                enable = true,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = "2",
+                  trailing_table_separator = "smart",
+                },
               },
             },
           },
-        },
-      }
+        }
+      end
 
       -- rust
       local rt = require("rust-tools")
@@ -113,9 +116,12 @@ return {
       })
 
       -- typescript
-      lspconfig.tsserver.setup {
-        capabilities = capabilities,
-      }
+      if vim.g.nixConfig.lsp.tsserver.enabled then
+        lspconfig.tsserver.setup {
+          cmd = { vim.g.nixConfig.lsp.tsserver.serverPath, '--stdio' },
+          capabilities = capabilities,
+        }
+      end
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -135,64 +141,82 @@ return {
       })
 
       -- nix
-      lspconfig.nixd.setup {
-        capabilities = capabilities,
-      }
+      if vim.g.nixConfig.lsp.nixd.enabled then
+        lspconfig.nixd.setup {
+          capabilities = capabilities,
+          cmd = { vim.g.nixConfig.lsp.nixd.serverPath },
+        }
+      end
 
       -- c#
-      lspconfig.omnisharp.setup {
-        capabilities = capabilities,
-        cmd = { 'OmniSharp' },
-        enable_import_completion = true,
-      }
+      if vim.g.nixConfig.lsp.omnisharp.enabled then
+        lspconfig.omnisharp.setup {
+          capabilities = capabilities,
+          cmd = { vim.g.nixConfig.lsp.omnisharp.serverPath },
+          enable_import_completion = true,
+        }
+      end
 
       -- json
-      lspconfig.jsonls.setup {
-        capabilities = capabilities,
-        cmd = { "vscode-json-languageserver", "--stdio" },
-      }
+      if vim.g.nixConfig.lsp.jsonls.enabled then
+        lspconfig.jsonls.setup {
+          capabilities = capabilities,
+          cmd = { vim.g.nixConfig.lsp.jsonls.serverPath, "--stdio" },
+        }
+      end
 
       -- protobuf
-      lspconfig.bufls.setup {
-        capabilities = capabilities,
-      }
+      if vim.g.nixConfig.lsp.bufls.enabled then
+        lspconfig.bufls.setup {
+          cmd = { vim.g.nixConfig.lsp.bufls.serverPath, "serve" },
+          capabilities = capabilities,
+        }
+      end
 
       -- efm
-      lspconfig.efm.setup {
-        capabilities = capabilities,
-        init_options = { documentFormatting = true },
-        filetypes = { 'typescript' },
-        settings = {
-          rootMarkers = { '.git/' },
-          languages = {
-            typescript = {
-              {
-                formatCommand =
-                'prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
-                formatStdin = true,
-                rootMarkers = {
-                  '.prettierrc',
-                  '.prettierrc.json',
-                  '.prettierrc.toml',
-                  '.prettierrc.json',
-                  '.prettierrc.yml',
-                  '.prettierrc.yaml',
-                  '.prettierrc.json5',
-                  '.prettierrc.js',
-                  '.prettierrc.cjs',
-                  '.prettierrc.config.js',
-                  '.prettierrc.config.cjs',
+      if vim.g.nixConfig.lsp.efm.enabled then
+        lspconfig.efm.setup {
+          cmd = { vim.g.nixConfig.lsp.efm.serverPath },
+          capabilities = capabilities,
+          init_options = { documentFormatting = true },
+          filetypes = { 'typescript', 'json', 'jsonc' },
+          settings = {
+            rootMarkers = { '.git/' },
+            languages = {
+              typescript = {
+                {
+                  formatCommand =
+                      vim.g.nixConfig.lsp.efm.prettierdPath .. ' ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
+                  formatStdin = true,
+                  rootMarkers = {
+                    '.prettierrc',
+                    '.prettierrc.json',
+                    '.prettierrc.toml',
+                    '.prettierrc.json',
+                    '.prettierrc.yml',
+                    '.prettierrc.yaml',
+                    '.prettierrc.json5',
+                    '.prettierrc.js',
+                    '.prettierrc.cjs',
+                    '.prettierrc.config.js',
+                    '.prettierrc.config.cjs',
+                  },
+                },
+              },
+              json = {
+                {
+                  formatCommand = vim.g.nixConfig.lsp.efm.fixJsonPath,
+                },
+              },
+              jsonc = {
+                {
+                  formatCommand = vim.g.nixConfig.lsp.efm.fixJsonPath,
                 },
               },
             },
-            json = {
-              {
-                formatCommand = 'fixjson',
-              },
-            },
           },
-        },
-      }
+        }
+      end
 
       -- diagnostics
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)

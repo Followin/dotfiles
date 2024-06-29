@@ -6,7 +6,49 @@ let
     sdk_7_0
     sdk_8_0
   ]);
-  commentEnable = true;
+  omnisharp =
+    (pkgs-unstable.writeShellScriptBin "omnisharp" ''
+      ${dotnetPkg}/bin/dotnet ${pkgs-unstable.omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll "$@"
+    '');
+  nvim = {
+    plugins = {
+      comment = {
+        enabled = true;
+      };
+    };
+    lsp = {
+      tsserver = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+      };
+      omnisharp = {
+        enabled = true;
+        serverPath = "${omnisharp}/bin/omnisharp";
+      };
+      lua_ls = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.lua-language-server}/bin/lua-language-server";
+      };
+      nixd = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.nixd}/bin/nixd";
+      };
+      jsonls = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver";
+      };
+      bufls = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.buf-language-server}/bin/bufls";
+      };
+      efm = {
+        enabled = true;
+        serverPath = "${pkgs-unstable.efm-langserver}/bin/efm-langserver";
+        prettierdPath = "${pkgs-unstable.prettierd}/bin/prettierd";
+        fixJsonPath = "${pkgs-unstable.nodePackages.fixjson}/bin/fixjson";
+      };
+    };
+  };
 in
 {
   home.username = "main";
@@ -24,10 +66,44 @@ in
   };
 
   home.file.".config/nvim/lua/config.lua".text = ''
-    vim.g.plugins = {
-      comment = {
-        enabled = ${if commentEnable then "true" else "false"};
+    vim.g.nixConfig = {
+      plugins = {
+        comment = {
+          enabled = ${if nvim.plugins.comment.enabled then "true" else "false"};
+        },
       },
+      lsp = {
+        tsserver = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.tsserver.enabled};
+          serverPath = "${nvim.lsp.tsserver.serverPath}";
+        };
+        omnisharp = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.omnisharp.enabled};
+          serverPath = "${nvim.lsp.omnisharp.serverPath}";
+        };
+        lua_ls = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.lua_ls.enabled};
+          serverPath = "${nvim.lsp.lua_ls.serverPath}";
+        };
+        nixd = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.nixd.enabled};
+          serverPath = "${nvim.lsp.nixd.serverPath}";
+        };
+        jsonls = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.jsonls.enabled};
+          serverPath = "${nvim.lsp.jsonls.serverPath}";
+        };
+        bufls = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.bufls.enabled};
+          serverPath = "${nvim.lsp.bufls.serverPath}";
+        };
+        efm = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.efm.enabled};
+          serverPath = "${nvim.lsp.efm.serverPath}";
+          prettierdPath = "${nvim.lsp.efm.prettierdPath}";
+          fixJsonPath = "${nvim.lsp.efm.fixJsonPath}";
+        };
+      }
     }
   '';
 
@@ -96,22 +172,12 @@ in
       # neovim lsps and plugins
       nodejs_20
       dotnetPkg
-      lua-language-server
       luajitPackages.luarocks
-      nodePackages.eslint
-      nodePackages.typescript-language-server
-      nodePackages.vscode-json-languageserver
       nodePackages.fixjson
       prettierd
       nixpkgs-fmt
-      nixd
-      efm-langserver
       ripgrep
-      (writeShellScriptBin "OmniSharp" ''
-        ${dotnetPkg}/bin/dotnet ${omnisharp-roslyn}/lib/omnisharp-roslyn/OmniSharp.dll "$@"
-      '')
       netcoredbg
-      buf-language-server
       p7zip
       powershell
 
