@@ -179,7 +179,7 @@ return {
           cmd = { vim.g.nixConfig.lsp.efm.serverPath },
           capabilities = capabilities,
           init_options = { documentFormatting = true },
-          filetypes = { 'typescript', 'json', 'jsonc' },
+          filetypes = { 'typescript', 'json' },
           settings = {
             rootMarkers = { '.git/' },
             languages = {

@@ -30,6 +30,7 @@ vim.opt.relativenumber = true
 
 vim.wo.number = true
 vim.wo.signcolumn = 'yes'
+vim.wo.wrap = false;
 
 vim.o.mouse = 'a'
 vim.o.undofile = true
@@ -55,7 +56,7 @@ vim.filetype.add({
   },
 });
 
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = "unnamed"
 
 vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
 vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })

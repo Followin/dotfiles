@@ -12,6 +12,7 @@
   networking.extraHosts = ''
     10.45.16.10 pxdevaks001-b5o4ylsd.999bd9f0-b7c7-4e9f-af42-467292a14e36.privatelink.westeurope.azmk8s.io
     10.45.16.101 api-runtime-service.projectx-dev.local
+    10.45.16.101 api-blob-service.projectx-dev.local
     10.45.16.101 git-backend.projectx-dev.local
   '';
 
