@@ -120,9 +120,13 @@ in
 
   programs.git = {
     enable = true;
-    diff-so-fancy = {
+    # diff-so-fancy = {
+    #   enable = true;
+    #   changeHunkIndicators = true;
+    # };
+    difftastic = {
       enable = true;
-      changeHunkIndicators = true;
+      background = "dark";
     };
     extraConfig = {
       rerere.enable = true;
