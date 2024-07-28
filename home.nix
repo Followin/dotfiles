@@ -191,9 +191,6 @@ in
       jetbrains.rider
       jetbrains.datagrip
 
-      kubectl
-      azure-cli
-
       google-chrome
 
       jq
@@ -201,6 +198,7 @@ in
       openssl
       openvpn
 
+      azure-cli
       kubectl
       kubernetes-helm
       minikube
