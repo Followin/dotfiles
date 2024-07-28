@@ -184,6 +184,7 @@ in
       netcoredbg
       p7zip
       powershell
+      csharprepl
 
       docker-compose
 
@@ -194,11 +195,6 @@ in
       azure-cli
 
       google-chrome
-      discord
-      telegram-desktop
-      zoom-us
-      teams-for-linux
-      xcompmgr
 
       jq
       wireshark
