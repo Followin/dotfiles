@@ -15,6 +15,9 @@ let
       comment = {
         enabled = true;
       };
+      copilot = {
+        enabled = false;
+      };
     };
     lsp = {
       tsserver = {
@@ -69,8 +72,11 @@ in
     vim.g.nixConfig = {
       plugins = {
         comment = {
-          enabled = ${if nvim.plugins.comment.enabled then "true" else "false"};
+          enabled = ${pkgs.lib.boolToString nvim.plugins.comment.enabled};
         },
+        copilot = {
+          enabled = ${pkgs.lib.boolToString nvim.plugins.copilot.enabled};
+        }
       },
       lsp = {
         tsserver = {
