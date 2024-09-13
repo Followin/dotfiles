@@ -151,7 +151,7 @@
   programs.wireshark.enable = true;
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" "vboxsf" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" "vboxsf" ]; 
   };
 
   programs.fish.enable = true;
