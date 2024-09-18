@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, pkgs-unstable, inputs, ... }:
 
 let
   dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
@@ -122,6 +122,11 @@ in
   home.file."background.png".source = ./background.png;
 
   home.file.".ideavimrc".source = ./home/.ideavimrc;
+
+  nix.registry = {
+    nixpkgs.flake = inputs.nixpkgs-unstable;
+    nixpkgs.from = { type = "indirect"; id = "nixpkgs"; };
+  };
 
   programs.git = {
     enable = true;
