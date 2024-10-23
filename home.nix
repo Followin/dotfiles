@@ -19,7 +19,7 @@ let
       };
     };
     lsp = {
-      tsserver = {
+      ts = {
         enabled = true;
         serverPath = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
       };
@@ -78,9 +78,9 @@ in
         }
       },
       lsp = {
-        tsserver = {
-          enabled = ${pkgs.lib.boolToString nvim.lsp.tsserver.enabled};
-          serverPath = "${nvim.lsp.tsserver.serverPath}";
+        ts = {
+          enabled = ${pkgs.lib.boolToString nvim.lsp.ts.enabled};
+          serverPath = "${nvim.lsp.ts.serverPath}";
         };
         omnisharp = {
           enabled = ${pkgs.lib.boolToString nvim.lsp.omnisharp.enabled};

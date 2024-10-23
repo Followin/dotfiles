@@ -116,9 +116,9 @@ return {
       })
 
       -- typescript
-      if vim.g.nixConfig.lsp.tsserver.enabled then
-        lspconfig.tsserver.setup {
-          cmd = { vim.g.nixConfig.lsp.tsserver.serverPath, '--stdio' },
+      if vim.g.nixConfig.lsp.ts.enabled then
+        lspconfig.ts_ls.setup {
+          cmd = { vim.g.nixConfig.lsp.ts.serverPath, '--stdio' },
           capabilities = capabilities,
         }
       end
