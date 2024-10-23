@@ -28,4 +28,6 @@
   ];
 
   networking.firewall.interfaces."enp0s8".allowedTCPPorts = [ 2375 ];
+
+  # networking.firewall.checkReversePath = "loose";
 }

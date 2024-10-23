@@ -1,7 +1,7 @@
 { pkgs, pkgs-unstable, inputs, ... }:
 
 let
-  dotnetPkg = (with pkgs.dotnetCorePackages; combinePackages [
+  dotnetPkg = (with pkgs-unstable.dotnetCorePackages; combinePackages [
     sdk_8_0
     sdk_9_0
   ]);
@@ -208,7 +208,7 @@ in
       openssl
       openvpn
 
-      azure-cli
+      pkgs.azure-cli
       kubectl
       kubernetes-helm
       minikube
