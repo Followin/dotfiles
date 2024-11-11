@@ -167,7 +167,7 @@ return {
 
       -- protobuf
       if vim.g.nixConfig.lsp.bufls.enabled then
-        lspconfig.bufls.setup {
+        lspconfig.buf_ls.setup {
           cmd = { vim.g.nixConfig.lsp.bufls.serverPath, "serve" },
           capabilities = capabilities,
         }
