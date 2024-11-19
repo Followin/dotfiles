@@ -41,7 +41,7 @@ let
       };
       bufls = {
         enabled = true;
-        serverPath = "${pkgs-unstable.buf-language-server}/bin/bufls";
+        serverPath = "${pkgs.buf-language-server}/bin/bufls";
       };
       efm = {
         enabled = true;
