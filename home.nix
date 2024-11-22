@@ -1,7 +1,7 @@
-{ pkgs, pkgs-unstable, inputs, ... }:
+{ pkgs, pkgs-unstable, pkgs-nixos-unstable, inputs, ... }:
 
 let
-  dotnetPkg = (with pkgs-unstable.dotnetCorePackages; combinePackages [
+  dotnetPkg = (with pkgs-nixos-unstable.dotnetCorePackages; combinePackages [
     sdk_8_0
     sdk_9_0
   ]);
