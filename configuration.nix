@@ -152,6 +152,7 @@
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "input" "autologin" "touch" "docker" "wireshark" "vboxsf" ]; 
+    hashedPassword = "$y$j9T$cXLG2.zqf1PU62Wf/FC6h1$LtmF6y25m5e.uQ9Y7rCI7veaCU.pQ5bE/KxXdCSFcS0";
   };
 
   programs.fish.enable = true;
