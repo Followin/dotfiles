@@ -17,6 +17,10 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rider-patch = {
+      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/358178.patch";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, py-wireguard, rust-overlay, nixpkgs-unstable, nixos-unstable, ... }@inputs:
@@ -29,13 +33,23 @@
           allowUnfree = true;
         };
       };
+      pkgs-unstable-patched = pkgs-unstable.applyPatches {
+        src = pkgs-unstable.path;
+        patches = [ inputs.rider-patch ];
+      };
+      pkgs-unstable-patched-import = import pkgs-unstable-patched {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
       pkgs-nixos-unstable = import nixos-unstable {
         inherit system;
         config = {
           allowUnfree = true;
         };
       };
-      specialArgs = { inherit inputs username pkgs-unstable pkgs-nixos-unstable; };
+      specialArgs = { inherit inputs username pkgs-nixos-unstable; pkgs-unstable = pkgs-unstable-patched-import; };
       sharedModules = [
         py-wireguard.nixosModules.default
         ./configuration.nix

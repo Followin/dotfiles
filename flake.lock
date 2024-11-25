@@ -89,6 +89,18 @@
         "type": "github"
       }
     },
+    "rider-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-yumGOqoYhk+wrkjCv6yXSO2c2j+IHSGH95hY84DbuE0=",
+        "type": "file",
+        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/358178.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/358178.patch"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -96,6 +108,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "py-wireguard": "py-wireguard",
+        "rider-patch": "rider-patch",
         "rust-overlay": "rust-overlay"
       }
     },
