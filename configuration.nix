@@ -26,9 +26,9 @@
       options = "--delete-older-than 30d";
     };
 
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
-      experimental-features = nix-command flakes repl-flake
+      experimental-features = nix-command flakes
     '';
   };
 
@@ -50,10 +50,8 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   # # Enable the X11 windowing system.
@@ -128,7 +126,7 @@
   };
 
   # Enable sound.
-  sound.enable = false;
+  # sound.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

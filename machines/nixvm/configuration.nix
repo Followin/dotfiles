@@ -12,6 +12,7 @@
   networking.extraHosts = ''
     10.45.16.100 projectx-dev.local
     10.45.16.100 keycloak.projectx-dev.local
+    10.45.32.4 pxqaaks001-gijdifoa.1d1a0eba-e1a2-4f4e-877a-a13abcf59220.privatelink.westeurope.azmk8s.io
   '';
 
   networking.firewall.interfaces."enp0s8".allowedUDPPorts = [ 5353 ];

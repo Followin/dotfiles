@@ -41,7 +41,7 @@ let
       };
       bufls = {
         enabled = true;
-        serverPath = "${pkgs.buf-language-server}/bin/bufls";
+        serverPath = "${pkgs-unstable.buf}/bin/bufls";
       };
       efm = {
         enabled = true;
@@ -211,11 +211,11 @@ in
       pkgs.azure-cli
       kubectl
       kubernetes-helm
-      minikube
+      pkgs.minikube
 
       feh
 
-      shutter
+      pkgs.shutter
 
       xfce.thunar
 
