@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.zig_fmt_autosave = false;
 
 require("config")
 require("lazy").setup("plugins")

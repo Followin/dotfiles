@@ -108,6 +108,10 @@ in
           prettierdPath = "${nvim.lsp.efm.prettierdPath}";
           fixJsonPath = "${nvim.lsp.efm.fixJsonPath}";
         };
+        zls = {
+          enabled = true;
+          serverPath = "${pkgs-unstable.zls}/bin/zls";
+        };
       }
     }
   '';
@@ -184,7 +188,7 @@ in
       neovide
 
       # neovim lsps and plugins
-      nodejs_20
+      nodejs_22
       dotnetPkg
       luajitPackages.luarocks
       nodePackages.fixjson
@@ -195,11 +199,12 @@ in
       p7zip
       powershell
       csharprepl
+      zig
 
       docker-compose
 
       jetbrains.rider
-      jetbrains.datagrip
+      # jetbrains.datagrip
 
       google-chrome
 

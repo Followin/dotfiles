@@ -173,6 +173,15 @@ return {
         }
       end
 
+      -- zig
+      if vim.g.nixConfig.lsp.zls.enabled then
+        lspconfig.zls.setup {
+          cmd = { vim.g.nixConfig.lsp.zls.serverPath },
+          capabilities = capabilities,
+        }
+      end
+
+
       -- efm
       if vim.g.nixConfig.lsp.efm.enabled then
         lspconfig.efm.setup {

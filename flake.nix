@@ -57,14 +57,14 @@
         }
 
         # rust
-        ({ pkgs, ... }: {
-          nixpkgs.overlays = [ rust-overlay.overlays.default ];
-          home-manager.users.${username}.home.packages = [
-            (pkgs.rust-bin.nightly.latest.default.override {
-              extensions = [ "rust-src" "rust-analyzer" "clippy" ];
-            })
-          ];
-        })
+        # ({ pkgs, ... }: {
+        #   nixpkgs.overlays = [ rust-overlay.overlays.default ];
+        #   home-manager.users.${username}.home.packages = [
+        #     (pkgs.rust-bin.nightly.latest.default.override {
+        #       extensions = [ "rust-src" "rust-analyzer" "clippy" ];
+        #     })
+        #   ];
+        # })
       ];
       nixosModules = [
         ./machines/nixos/configuration.nix
