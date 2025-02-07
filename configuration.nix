@@ -191,6 +191,8 @@
       lsof
       neofetch
       file
+      dig
+      tcpdump
 
       cmake
       gnumake
