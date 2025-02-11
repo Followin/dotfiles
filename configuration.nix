@@ -194,6 +194,10 @@
       dig
       tcpdump
 
+      nasm
+      xxd
+      hexyl
+
       cmake
       gnumake
 
@@ -209,6 +213,17 @@
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
     XDG_DATA_HOME = "$HOME/.local/share";
+  };
+
+  environment.etc = {
+    "xdg/gtk-3.0/settings.ini".text = ''
+      [Settings]
+      gtk-application-prefer-dark-theme = true
+    '';
+    "xdg/gtk-4.0/settings.ini".text = ''
+      [Settings]
+      gtk-application-prefer-dark-theme = true
+    '';
   };
 
   # Some programs need SUID wrappers, can be configured further or are
