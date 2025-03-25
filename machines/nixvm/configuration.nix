@@ -15,6 +15,7 @@
     10.45.16.100 keycloak.projectx-dev.local
     10.45.16.103 argo.projectx-dev.local
     10.45.16.10 pxdevaks001-qyda9t5e.69e97dff-e20c-4c79-9857-adcefd58da4e.privatelink.westeurope.azmk8s.io
+    10.45.32.10 pxqaaks001-1903s7tl.4115dac9-d935-412e-b954-bcea91eb6180.privatelink.westeurope.azmk8s.io
   '';
 
   networking.firewall.interfaces."enp0s8".allowedUDPPorts = [ 5353 ];

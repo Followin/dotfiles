@@ -161,6 +161,9 @@ in
           commit = {
             gpgSign = true;
           };
+          tag = {
+            gpgSign = true;
+          };
         };
       }
     ];

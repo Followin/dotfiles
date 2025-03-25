@@ -15,6 +15,9 @@
         commit = {
           gpgSign = true;
         };
+        tag = {
+          gpgSign = true;
+        };
       };
     }
   ];
