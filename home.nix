@@ -112,6 +112,10 @@ in
           enabled = true;
           serverPath = "${pkgs-unstable.zls}/bin/zls";
         };
+        hls = {
+          enabled = true;
+          serverPath = "${pkgs-unstable.haskell-language-server}/bin/haskell-language-server-wrapper"
+        }
       }
     }
   '';
@@ -203,6 +207,8 @@ in
       powershell
       csharprepl
       zig
+      haskell-language-server
+      ghc
 
       docker-compose
 

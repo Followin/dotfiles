@@ -181,6 +181,14 @@ return {
         }
       end
 
+      -- haskell
+      if vim.g.nixConfig.lsp.hls.enabled then
+        vim.lsp.config('hls', {
+          cmd = { vim.g.nixConfig.lsp.hls.serverPath, "--lsp" },
+        })
+
+        vim.lsp.enable('hls')
+      end
 
       -- efm
       if vim.g.nixConfig.lsp.efm.enabled then
