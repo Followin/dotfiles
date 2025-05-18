@@ -13,7 +13,12 @@
   networking.extraHosts = ''
     10.45.16.100 projectx-dev.local
     10.45.16.100 keycloak.projectx-dev.local
+    10.45.16.100 kafka-ui.projectx-dev.local
+    10.45.16.100 grafana.projectx-dev.local
     10.45.16.103 argo.projectx-dev.local
+    10.45.33.46 argo.projectx-qa.local
+    127.0.0.1 projectx-localdev.local
+    127.0.0.1 keycloak.projectx-localdev.local
     10.45.16.10 pxdevaks001-qyda9t5e.69e97dff-e20c-4c79-9857-adcefd58da4e.privatelink.westeurope.azmk8s.io
     10.45.32.10 pxqaaks001-1903s7tl.4115dac9-d935-412e-b954-bcea91eb6180.privatelink.westeurope.azmk8s.io
   '';
