@@ -57,8 +57,6 @@ return {
 
       require('neodev').setup()
 
-      vim.lsp.inlay_hint.enable(true);
-
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
@@ -118,6 +116,10 @@ return {
         callback = function(ev)
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+          local toggle_inlay_hints = function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end
+
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -127,6 +129,7 @@ return {
           vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
           vim.keymap.set({ 'n', 'v' }, '<leader>la', require("actions-preview").code_actions, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', '<leader>li', toggle_inlay_hints, opts)
         end,
       })
 
