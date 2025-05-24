@@ -44,14 +44,20 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'folke/neodev.nvim',
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
-      { 'simrat39/rust-tools.nvim' },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      {
+        'mrcjkb/rustaceanvim',
+        version = '^6', -- Recommended
+        lazy = false,   -- This plugin is already lazy
+      },
       "aznhe21/actions-preview.nvim",
     },
     config = function()
       local lspconfig = require('lspconfig')
 
       require('neodev').setup()
+
+      vim.lsp.inlay_hint.enable(true);
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -83,37 +89,21 @@ return {
       end
 
       -- rust
-      local rt = require("rust-tools")
-
-      rt.setup({
+      vim.g.rustaceanvim = {
         server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<Leader>lb", rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>la", rt.code_action_group.code_action_group, { buffer = bufnr })
-          end,
-          capabilities = capabilities,
-          settings = {
-            ["rust-analyzer"] = {
+          default_settings = {
+            ['rust-analyzer'] = {
               procMacro = {
                 enable = true,
               },
-              checkOnSave = {
+              check = {
                 command = "clippy",
               },
+              checkOnSave = true,
             },
           },
         },
-        tools = {
-          hover_actions = {
-            auto_focus = true,
-          },
-          runnables = {
-            use_telescope = true,
-          },
-        },
-      })
+      }
 
       -- typescript
       if vim.g.nixConfig.lsp.ts.enabled then

@@ -26,7 +26,9 @@ return {
             [[
               require("lsp-progress").progress({
                 format = function(messages)
-                    local active_clients = vim.lsp.get_active_clients()
+                    local active_clients = vim.lsp.get_clients({
+                        bufnr = bufnr,
+                    })
                     local client_count = #active_clients
                     if #active_clients <= 0 then
                         return ""
