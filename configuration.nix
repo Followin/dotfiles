@@ -23,12 +23,12 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 10d";
     };
 
     package = pkgs.nixVersions.stable;
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes pipe-operators
     '';
   };
 
@@ -158,7 +158,8 @@
   users.defaultUserShell = pkgs.fish;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 
   # List packages installed in system profile. To search, run:
@@ -193,6 +194,7 @@
       file
       dig
       tcpdump
+      ncdu
 
       nasm
       xxd

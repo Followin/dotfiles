@@ -212,7 +212,7 @@ in
 
       docker-compose
 
-      jetbrains.rider
+      pkgs.jetbrains.rider
       # jetbrains.datagrip
 
       google-chrome
