@@ -44,13 +44,14 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'folke/neodev.nvim',
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',      tag = 'legacy', opts = {} },
       {
         'mrcjkb/rustaceanvim',
         version = '^6', -- Recommended
         lazy = false,   -- This plugin is already lazy
       },
       "aznhe21/actions-preview.nvim",
+      { "qvalentin/helm-ls.nvim", ft = "helm" },
     },
     config = function()
       local lspconfig = require('lspconfig')
@@ -181,6 +182,22 @@ return {
         })
 
         vim.lsp.enable('hls')
+      end
+
+      -- helm
+      if vim.g.nixConfig.lsp.helmls.enabled then
+        vim.lsp.config('helm_ls', {
+          cmd = { vim.g.nixConfig.lsp.helmls.serverPath, "serve" },
+          -- filetypes = { "yaml" },
+          settings = {
+            ['helm-ls'] = {
+              yamlls = {
+                path = vim.g.nixConfig.lsp.helmls.yamlServerPath,
+              },
+            },
+          },
+        })
+        vim.lsp.enable('helm_ls');
       end
 
       -- efm

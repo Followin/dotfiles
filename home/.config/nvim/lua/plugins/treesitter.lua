@@ -24,6 +24,7 @@ return {
           'css',
           'javascript',
           'jsdoc',
+          'helm',
         },
         auto_install = true,
 

@@ -115,7 +115,12 @@ in
         hls = {
           enabled = true;
           serverPath = "${pkgs-unstable.haskell-language-server}/bin/haskell-language-server-wrapper"
-        }
+        };
+        helmls = {
+          enabled = true;
+          serverPath = "${pkgs-unstable.helm-ls}/bin/helm_ls";
+          yamlServerPath = "${pkgs-unstable.yaml-language-server}/bin/yaml-language-server";
+        };
       }
     }
   '';
@@ -217,6 +222,7 @@ in
 
       google-chrome
 
+      oha
       jq
       wireshark
       openssl
