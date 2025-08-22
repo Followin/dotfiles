@@ -102,13 +102,14 @@
   security.rtkit.enable = true;
 
   virtualisation.docker = {
+    package = pkgs-unstable.docker;
     enable = true;
     # extraOptions = "-H tcp://0.0.0.0:2375";
     daemon.settings = {
       hosts = [
         "tcp://0.0.0.0:2375"
       ];
-      userland-proxy = false;
+      # userland-proxy = false;
     };
   };
 
@@ -117,6 +118,7 @@
 
   #resolved
   networking.useNetworkd = true;
+  networking.enableIPv6 = false;
 
   services.resolved = {
     enable = true;
