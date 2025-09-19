@@ -18,6 +18,7 @@
         "https://cache.nixos.org"
       ];
       auto-optimise-store = true;
+      download-buffer-size = 524288000;
     };
 
     gc = {
