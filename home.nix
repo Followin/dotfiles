@@ -230,6 +230,7 @@ in
 
       pkgs.azure-cli
       kubectl
+      k9s
       kubernetes-helm
       pkgs.minikube
 

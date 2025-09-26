@@ -17,6 +17,11 @@
     10.45.16.100 grafana.projectx-dev.local
     10.45.16.103 argo.projectx-dev.local
     10.45.33.46 argo.projectx-qa.local
+    10.45.33.48 api.projectx-qa.local
+    10.45.33.47 projectx-qa.local
+    10.45.33.47 keycloak.projectx-qa.local
+    10.45.33.47 grafana.projectx-qa.local
+    10.45.33.47 kafka-ui.projectx-qa.local
     127.0.0.1 projectx-localdev.local
     127.0.0.1 keycloak.projectx-localdev.local
     10.45.16.10 pxdevaks001-qyda9t5e.69e97dff-e20c-4c79-9857-adcefd58da4e.privatelink.westeurope.azmk8s.io
