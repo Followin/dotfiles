@@ -3,7 +3,7 @@
 let
   dotnetPkg = (with pkgs-unstable.dotnetCorePackages; combinePackages [
     sdk_8_0
-    # sdk_9_0
+    sdk_10_0
   ]);
   omnisharp =
     (pkgs-unstable.writeShellScriptBin "omnisharp" ''
@@ -175,17 +175,14 @@ in
     nixpkgs.from = { type = "indirect"; id = "nixpkgs"; };
   };
 
+
   programs.git = {
     enable = true;
     # diff-so-fancy = {
     #   enable = true;
     #   changeHunkIndicators = true;
     # };
-    difftastic = {
-      enable = true;
-      background = "dark";
-    };
-    extraConfig = {
+    settings = {
       rerere.enable = true;
       rebase.updateRefs = true;
     };
@@ -210,6 +207,12 @@ in
         };
       }
     ];
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+    options.background = "dark";
   };
 
   programs.fish =
@@ -273,7 +276,7 @@ in
 
       pkgs.shutter
 
-      xfce.thunar
+      thunar
 
       # steam
       # protontricks
@@ -284,6 +287,9 @@ in
 
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnetPkg}";
+    OPENSSL_NO_VENDOR = 1;
+    OPENSSL_DIR="${pkgs-unstable.openssl.dev}";
+    OPENSSL_LIB_DIR="${pkgs-unstable.lib.getLib pkgs-unstable.openssl}/lib";
   };
 
   # TODO: Make derivation out of this

@@ -54,7 +54,7 @@ return {
       { "qvalentin/helm-ls.nvim", ft = "helm" },
     },
     config = function()
-      local lspconfig = require('lspconfig')
+      local lspconfig = vim.lsp.config;
 
       require('neodev').setup()
 
@@ -63,7 +63,7 @@ return {
 
       -- lua
       if vim.g.nixConfig.lsp.lua_ls.enabled then
-        lspconfig.lua_ls.setup {
+        vim.lsp.config('lua_ls', {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.lua_ls.serverPath },
           settings = {
@@ -84,7 +84,7 @@ return {
               },
             },
           },
-        }
+        })
       end
 
       -- rust
@@ -106,10 +106,10 @@ return {
 
       -- typescript
       if vim.g.nixConfig.lsp.ts.enabled then
-        lspconfig.ts_ls.setup {
+        vim.lsp.config('ts_ls', {
           cmd = { vim.g.nixConfig.lsp.ts.serverPath, '--stdio' },
           capabilities = capabilities,
-        }
+        })
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -136,43 +136,43 @@ return {
 
       -- nix
       if vim.g.nixConfig.lsp.nixd.enabled then
-        lspconfig.nixd.setup {
+        vim.lsp.config('nixd', {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.nixd.serverPath },
-        }
+        })
       end
 
       -- c#
       if vim.g.nixConfig.lsp.omnisharp.enabled then
-        lspconfig.omnisharp.setup {
+        vim.lsp.config('omnisharp', {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.omnisharp.serverPath },
           enable_import_completion = true,
-        }
+        })
       end
 
       -- json
       if vim.g.nixConfig.lsp.jsonls.enabled then
-        lspconfig.jsonls.setup {
+        vim.lsp.config('jsonls', {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.jsonls.serverPath, "--stdio" },
-        }
+        })
       end
 
       -- protobuf
       if vim.g.nixConfig.lsp.bufls.enabled then
-        lspconfig.buf_ls.setup {
+        vim.lsp.config('buf_ls', {
           cmd = { vim.g.nixConfig.lsp.bufls.serverPath, "serve" },
           capabilities = capabilities,
-        }
+        })
       end
 
       -- zig
       if vim.g.nixConfig.lsp.zls.enabled then
-        lspconfig.zls.setup {
+        vim.lsp.config('zls', {
           cmd = { vim.g.nixConfig.lsp.zls.serverPath },
           capabilities = capabilities,
-        }
+        })
       end
 
       -- haskell
@@ -202,7 +202,7 @@ return {
 
       -- efm
       if vim.g.nixConfig.lsp.efm.enabled then
-        lspconfig.efm.setup {
+        vim.lsp.config('efm', {
           cmd = { vim.g.nixConfig.lsp.efm.serverPath },
           capabilities = capabilities,
           init_options = { documentFormatting = true },
@@ -242,7 +242,7 @@ return {
               },
             },
           },
-        }
+        })
       end
 
       -- diagnostics

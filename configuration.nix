@@ -210,6 +210,8 @@
       pamixer
       pulseaudio
       alsa-utils
+
+      ncurses
     ];
   programs.nix-ld.enable = true;
 
