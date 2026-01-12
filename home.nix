@@ -121,6 +121,12 @@ in
           serverPath = "${pkgs-unstable.helm-ls}/bin/helm_ls";
           yamlServerPath = "${pkgs-unstable.yaml-language-server}/bin/yaml-language-server";
         };
+        angular = {
+          enabled = true;
+          serverPath = "${pkgs-unstable.angular-language-server}/bin/ngserver";
+          angularServerFolder = "${pkgs-unstable.angular-language-server}/bin";
+          tsServerFolder = "${pkgs-unstable.typescript}/bin";
+        };
       }
     }
   '';
@@ -237,7 +243,7 @@ in
       neovide
 
       # neovim lsps and plugins
-      nodejs_22
+      nodejs_25
       dotnetPkg
       luajitPackages.luarocks
       nodePackages.fixjson
@@ -251,6 +257,7 @@ in
       zig
       haskell-language-server
       ghc
+      angular-language-server
 
       docker-compose
 

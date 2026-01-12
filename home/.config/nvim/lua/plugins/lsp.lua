@@ -85,6 +85,8 @@ return {
             },
           },
         })
+
+        vim.lsp.enable('lua_ls')
       end
 
       -- rust
@@ -110,6 +112,57 @@ return {
           cmd = { vim.g.nixConfig.lsp.ts.serverPath, '--stdio' },
           capabilities = capabilities,
         })
+
+        vim.lsp.enable('ts_ls')
+      end
+
+      -- angular
+      local angularLsp = vim.g.nixConfig.lsp.angular
+      if angularLsp.enabled then
+        local function get_angular_core_version(root_dir)
+          local package_json = vim.fs.joinpath(root_dir, 'package.json')
+          if not vim.uv.fs_stat(package_json) then
+            return ''
+          end
+
+          local ok, content = pcall(vim.fn.readblob, package_json)
+          if not ok or not content then
+            return ''
+          end
+
+          local json = vim.json.decode(content) or {}
+
+          local version = (json.dependencies or {})['@angular/core'] or ''
+          return version:match('%d+%.%d+%.%d+') or ''
+        end
+
+        vim.lsp.config('angularls', {
+          cmd = function(dispatchers, config)
+            local root_dir = config.root or vim.fn.getcwd()
+            local project_node_modules = root_dir .. "/node_modules"
+            local project_angular_server_folder = project_node_modules .. "/@angular/language-server/bin"
+            local project_ts_server_folder = project_node_modules .. "/typescript/lib"
+
+            local ts_server_probe = project_ts_server_folder .. ',' .. angularLsp.tsServerFolder
+            local angular_server_probe = project_angular_server_folder .. ',' .. angularLsp.angularServerFolder
+
+            local cmd = {
+              project_angular_server_folder .. '/ngserver',
+              '--stdio',
+              '--tsProbeLocations',
+              ts_server_probe,
+              '--ngProbeLocations',
+              angular_server_probe,
+              '--angularCoreVersion',
+              get_angular_core_version(root_dir),
+            }
+
+            return vim.lsp.rpc.start(cmd, dispatchers)
+          end,
+          capabilities = capabilities,
+        })
+
+        vim.lsp.enable('angularls')
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -134,12 +187,28 @@ return {
         end,
       })
 
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('UserLspConfig2', {}),
+        callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          local filetype = vim.bo[event.buf].filetype
+
+          if client and client.name == "ts_ls" and (filetype == "typescript" or filetype == "javascript") then
+            -- Disable typescript renaming if angular language service is present
+            if vim.lsp.get_clients({ bufnr = event.buf, name = "angularls" }) then
+              client.server_capabilities.renameProvider = false
+            end
+          end
+        end,
+      })
+
       -- nix
       if vim.g.nixConfig.lsp.nixd.enabled then
         vim.lsp.config('nixd', {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.nixd.serverPath },
         })
+        vim.lsp.enable('nixd')
       end
 
       -- c#
@@ -149,6 +218,7 @@ return {
           cmd = { vim.g.nixConfig.lsp.omnisharp.serverPath },
           enable_import_completion = true,
         })
+        vim.lsp.enable('omnisharp')
       end
 
       -- json
@@ -157,6 +227,7 @@ return {
           capabilities = capabilities,
           cmd = { vim.g.nixConfig.lsp.jsonls.serverPath, "--stdio" },
         })
+        vim.lsp.enable('jsonls')
       end
 
       -- protobuf
@@ -165,6 +236,7 @@ return {
           cmd = { vim.g.nixConfig.lsp.bufls.serverPath, "serve" },
           capabilities = capabilities,
         })
+        vim.lsp.enable('buf_ls')
       end
 
       -- zig
@@ -173,6 +245,7 @@ return {
           cmd = { vim.g.nixConfig.lsp.zls.serverPath },
           capabilities = capabilities,
         })
+        vim.lsp.enable('zls')
       end
 
       -- haskell
@@ -213,7 +286,8 @@ return {
               typescript = {
                 {
                   formatCommand =
-                      vim.g.nixConfig.lsp.efm.prettierdPath .. ' ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
+                      vim.g.nixConfig.lsp.efm.prettierdPath ..
+                      ' ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
                   formatStdin = true,
                   rootMarkers = {
                     '.prettierrc',
@@ -243,6 +317,7 @@ return {
             },
           },
         })
+        vim.lsp.enable('efm')
       end
 
       -- diagnostics
