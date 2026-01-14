@@ -2,11 +2,15 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        branch = 'master',
+      },
       'norcalli/nvim-colorizer.lua',
       'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
+    branch = 'master',
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = {
