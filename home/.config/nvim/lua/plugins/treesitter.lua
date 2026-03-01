@@ -29,6 +29,7 @@ return {
           'javascript',
           'jsdoc',
           'helm',
+          'dockerfile',
         },
         auto_install = true,
 

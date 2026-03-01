@@ -179,6 +179,8 @@ in
   nix.registry = {
     nixpkgs.flake = inputs.nixpkgs-unstable;
     nixpkgs.from = { type = "indirect"; id = "nixpkgs"; };
+    nixpkgs-stable.flake = inputs.nixpkgs;
+    nixpkgs-stable.from = { type = "indirect"; id = "nixpkgs-stable"; };
   };
 
 
@@ -259,10 +261,10 @@ in
       ghc
       angular-language-server
 
-      docker-compose
-
       jetbrains.rider
-      # jetbrains.datagrip
+      jetbrains.datagrip
+      vscode
+      claude-code
 
       google-chrome
 
@@ -273,6 +275,8 @@ in
       openvpn
 
       pkgs.azure-cli
+      awscli2
+      terraform
       kubectl
       k9s
       kubernetes-helm
@@ -284,6 +288,7 @@ in
       pkgs.shutter
 
       thunar
+      postgresql
 
       # steam
       # protontricks

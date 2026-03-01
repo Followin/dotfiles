@@ -9,6 +9,7 @@
   boot.extraModprobeConfig = ''
     options libata.force=noncq
   '';
+  boot.growPartition = true;
 
   # boot.consoleLogLevel = 7;
 
@@ -75,8 +76,8 @@
     };
 
     xkb = {
-      layout = "us,ru,ua";
-      options = "ctrl:nocaps,grp:caps_shift_toggle,grp:shift_caps_toggle";
+      layout = "us,ru";
+      options = "ctrl:nocaps,grp:alt_shift_toggle,grp:alt_ctrl_toggle";
     };
   };
 
@@ -104,6 +105,10 @@
 
   virtualisation.docker = {
     package = pkgs-unstable.docker;
+    extraPackages = with pkgs-unstable; [
+      docker-buildx
+      docker-compose
+    ];
     enable = true;
     # extraOptions = "-H tcp://0.0.0.0:2375";
     daemon.settings = {
@@ -127,6 +132,8 @@
       MulticastDNS=true
     '';
   };
+
+  services.tailscale.enable = true;
 
   # Enable sound.
   # sound.enable = false;
@@ -212,6 +219,8 @@
       alsa-utils
 
       ncurses
+
+      pkgs.tailscale
     ];
   programs.nix-ld.enable = true;
 
@@ -220,6 +229,7 @@
     EDITOR = "nvim";
     FZF_CTRL_T_COMMAND = "fd --type f --hidden --follow --exclude .git --exclude node_modules";
     XDG_DATA_HOME = "$HOME/.local/share";
+    DOCKER_BUILDKIT = "1";
   };
 
   environment.etc = {
@@ -245,6 +255,16 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.listenAddresses = [ 
+    # {
+    #   addr = "[::]";
+    #   port = 22;
+    # }
+    {
+      addr = "0.0.0.0";
+      port = 22;
+    }
+  ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
