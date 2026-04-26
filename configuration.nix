@@ -200,7 +200,7 @@
       xdotool
       tldr
       lsof
-      neofetch
+      fastfetch
       file
       dig
       tcpdump

@@ -6,7 +6,7 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects',
         branch = 'master',
       },
-      'norcalli/nvim-colorizer.lua',
+      'catgoose/nvim-colorizer.lua',
       'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',

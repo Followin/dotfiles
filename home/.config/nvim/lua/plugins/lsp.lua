@@ -137,6 +137,12 @@ return {
         end
 
         vim.lsp.config('angularls', {
+          root_dir = function(bufnr, cb)
+            local root = vim.fs.root(bufnr, 'angular.json')
+            if root then
+              cb(root)
+            end
+          end,
           cmd = function(dispatchers, config)
             local root_dir = config.root or vim.fn.getcwd()
             local project_node_modules = root_dir .. "/node_modules"
@@ -163,6 +169,16 @@ return {
         })
 
         vim.lsp.enable('angularls')
+      end
+
+      local svelteLsp = vim.g.nixConfig.lsp.svelte
+      if svelteLsp.enabled then
+        vim.lsp.config('svelte', {
+          cmd = { svelteLsp.serverPath, '--stdio' },
+          capabilities = capabilities,
+        })
+
+        vim.lsp.enable('svelte')
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {

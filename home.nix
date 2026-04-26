@@ -21,7 +21,7 @@ let
     lsp = {
       ts = {
         enabled = true;
-        serverPath = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        serverPath = "${pkgs-unstable.typescript-language-server}/bin/typescript-language-server";
       };
       omnisharp = {
         enabled = true;
@@ -37,7 +37,7 @@ let
       };
       jsonls = {
         enabled = true;
-        serverPath = "${pkgs-unstable.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver";
+        serverPath = "${pkgs-unstable.vscode-json-languageserver}/bin/vscode-json-languageserver";
       };
       bufls = {
         enabled = true;
@@ -47,7 +47,7 @@ let
         enabled = true;
         serverPath = "${pkgs-unstable.efm-langserver}/bin/efm-langserver";
         prettierdPath = "${pkgs-unstable.prettierd}/bin/prettierd";
-        fixJsonPath = "${pkgs-unstable.nodePackages.fixjson}/bin/fixjson";
+        fixJsonPath = "${pkgs-unstable.fixjson}/bin/fixjson";
       };
     };
   };
@@ -126,6 +126,10 @@ in
           serverPath = "${pkgs-unstable.angular-language-server}/bin/ngserver";
           angularServerFolder = "${pkgs-unstable.angular-language-server}/bin";
           tsServerFolder = "${pkgs-unstable.typescript}/bin";
+        };
+        svelte = {
+          enabled = true;
+          serverPath = "${pkgs-unstable.svelte-language-server}/bin/svelteserver";
         };
       }
     }
@@ -248,7 +252,7 @@ in
       nodejs_25
       dotnetPkg
       luajitPackages.luarocks
-      nodePackages.fixjson
+      fixjson
       prettierd
       nixpkgs-fmt
       ripgrep
@@ -289,6 +293,7 @@ in
 
       thunar
       postgresql
+      mdbtools
 
       # steam
       # protontricks
